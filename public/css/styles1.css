@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    margin: 0;
+    
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+
+}
+
+h2 {
+    color: #95b634;
+}
+
+.pesquisa {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* Plano alimentar */
+.plano {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid #95b634;
+    margin-top: 5%;
+}
+
+.nome-plano {
+    color: #95b634;
+    margin-bottom: 5px;
+}
+
+.descricao {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+ /* ================= TABELA ================= */
+
+/* CONTAINER COM SCROLL */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; /* scroll quando necessário */
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background-color: white;
+}
+
+/* TABELA */
+.table {
+    min-width: 1200px; /* força o scroll horizontal */
+    table-layout: auto;
+    background-color: white;
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+/* CABEÇALHO */
+.table thead th {
+    background-color: #95b634;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* CeLULAS */
+.table tbody td {
+    background-color: white; 
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* HOVER NAS LINHAS */
+.table tbody tr:hover td {
+    background-color: #fff1d6; /* cor ao passar o mouse */
+    transition: background-color 0.2s ease;
+}
+
+/* ================= SCROLL ================= */
+
+.table-responsive::-webkit-scrollbar {
+    height: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: beige; /* mesma cor do tema */
+    border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #95b634; /* verde um pouco mais escuro */
+}
+
+/* Refeições */
+.refeicao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: beige;
+    border-radius: 8px;
+
+    padding: 12px;
+    margin-bottom: 10px;
+
+    border: 1px solid #eee;
+}
+
+.refeicao p {
+    margin: 3px 0 0 0;
+    font-size: 12px;
+    color: #666;
+}
+
+.acoes i{
+    font-weight: bold;
+   
+       display: inline-block;
+    align-items: center;
+  color: #95b634;
+
+margin: 4%;
+}
+strong{
+color: #95b634;
+}
