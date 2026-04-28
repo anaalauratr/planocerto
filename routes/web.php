@@ -23,7 +23,7 @@ Route::get('/CadastroPlano', [PlanoController::class, 'create'])
 Route::get('/AtualizarPlano', [PlanoController::class, 'edit'])
     ->name('AtualizarPlano');
 
-Route::get('/AtualizarRefeicao', [PlanoController::class, 'edit'])
+Route::get('/AtualizarRefeicao', [PlanoController::class, 'editRefeicao'])
     ->name('AtualizarRefeicao');    
 
 
