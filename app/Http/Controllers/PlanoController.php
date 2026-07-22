@@ -14,11 +14,11 @@ class PlanoController extends Controller
     {
         return view('cadastroPlano');
     }
-     public function edit()
+     public function view($id)
     {
         return view('atualizarPlano');
     }
-    public function editRefeicao()
+    public function viewRefeicao($id)
     {
         return view('atualizarRefeicao');
     }

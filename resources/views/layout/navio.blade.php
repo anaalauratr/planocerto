@@ -189,12 +189,12 @@ menuLateral.innerHTML = `
  
   <div class="item-menu">
     <i class="bi bi-person"></i>
-    <a href="{{ route('Perfil') }}"> Perfil </a>
+    <a href="{{ route('nutricionista.index') }}"> Perfil </a>
   </div>
 
   <div class="item-menu">
     <i class="bi bi-people-fill"></i>
-    <a href="{{ route('Cliente') }}"> Cliente </a>
+    <a href="{{ route('cliente.index') }}"> Cliente </a>
   </div>
 
   <div class="item-menu">

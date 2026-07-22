@@ -73,7 +73,7 @@
     <button
         type="button"
         class="btn btn-login px-4"
-        onclick="window.location.href='{{ route('CadastroNutricionista') }}'">
+        onclick="window.location.href='{{ route('nutricionista.create') }}'">
 
         CADASTRE-SE
 

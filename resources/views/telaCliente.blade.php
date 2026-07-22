@@ -10,7 +10,7 @@
 <!-- Campo de pesquisa -->
     <input type="text" class="pesquisa" placeholder="Pesquise">
 
-     <a class="btn btn-success btn" href="{{ route('CadastroCliente') }}">NOVO <i class="bi bi-plus-circle"></i></a>
+     <a class="btn btn-success btn" href="{{ route('cliente.create') }}">NOVO <i class="bi bi-plus-circle"></i></a>
     <!-- Div do plano alimentar -->
     <div class="plano">
 
@@ -21,12 +21,8 @@
                 <tr>
                     <th>Nome</th>
                     <th>Data de Nascimento</th>
-                    <th>Email</th>
                     <th>Objetivo</th>
-                    <th>Sexo</th>
-                    <th>Peso</th>
-                    <th>Altura</th>
-                    <th>Planos Alimentares</th>
+                
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -34,20 +30,19 @@
             <tbody>
 
                 <tr>
+                     @foreach ($clientes as $cliente)
+            <tr>
+                
+                
+                <td>{{ $cliente->user->name }}</td>
+                 <td>{{ $cliente->data_nascimento }}</td>
+                 <td>{{ $cliente->objetivo }}</td>
 
-                    <td>Maria</td>
-                    <td>01/01/2000</td>
-                    <td>email@email.com</td>
-                    <td>Emagrecer</td>
-                    <td>Feminino</td>
-                    <td>65</td>
-                    <td>1.65</td>
-                     <td>Nome do plano</td>
 
-                    <td class="acoes">
+                  <td class="acoes">
 
-                        <a href="{{ route('AtualizarCliente') }}">
-                            <i class="bi bi-pencil"></i>
+                        <a href="{{ route('cliente.view', $cliente->id) }}">
+                            <i class="bi bi-eye"></i>
                         </a>
 
                         <a href="#">
@@ -56,7 +51,15 @@
 
                     </td>
 
-                </tr>
+        
+                
+            </tr>
+        @endforeach
+
+                    
+
+                   
+                
 
             </tbody>
 

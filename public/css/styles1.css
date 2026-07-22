@@ -137,3 +137,10 @@ margin: 4%;
 strong{
 color: #95b634;
 }
+#mainNav .nav-link {
+    color: #95b634 !important;
+}
+
+#mainNav .nav-link:hover {
+    color: #7da12b !important; /* opcional */
+}

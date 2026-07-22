@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('refeicao', function (Blueprint $table) {
             $table->id();
-           $table->foreignId('plano_alimentar_id')->constrained('plano_alimentar')->cascadeOnDelete();
+           $table->foreignId('plano_alimentar_id');
+            $table->foreign('plano_alimentar_id')->references('id')->on('plano_alimentar');
            $table->string('nome', 100);
             $table->text('descricao');
             $table->time('horario');

@@ -122,7 +122,7 @@
         <button
             type="button"
             class="btn btn-login px-4"
-             onclick="window.location.href='{{ route('Cliente') }}'">Atualizar</button>
+             onclick="window.location.href='{{ route('cliente.index') }}'">Atualizar</button>
 
     </div>
 

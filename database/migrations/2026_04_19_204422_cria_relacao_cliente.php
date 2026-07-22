@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('relacao_cliente', function (Blueprint $table) {
             $table->id();
-             $table->foreignId('users_id')->constrained('users')->cascadeOnDelete();
-          $table->foreignId('plano_alimentar_id')->nullable()->constrained('plano_alimentar')->nullOnDelete();
+            $table->foreignId('users_id');
+            $table->foreign('users_id')->references('id')->on('users');
+             $table->foreignId('plano_alimentar_id');
+            $table->foreign('plano_alimentar_id')->references('id')->on('plano_alimentar');
+            
+         
             $table->text('objetivo');
             $table->date('data_nascimento');
             $table->float('peso');

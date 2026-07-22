@@ -28,6 +28,16 @@ Route::get('/AtualizarRefeicao', [PlanoController::class, 'editRefeicao'])
 
 
 //cliente
+
+
+
+Route::get('/cliente',                [ClienteController::class, 'index'])->name('cliente.index');
+Route::get('/cliente/create',         [ClienteController::class, 'create'])->name('cliente.create');
+Route::post('/cliente',               [ClienteController::class, 'store'])->name('cliente.store');
+Route::get('/cliente/{id}/view',      [ClienteController::class, 'view'])->name('cliente.view');
+Route::post('/cliente/{id}/update',   [ClienteController::class, 'update'])->name('cliente.update');
+Route::get('/cliente/{id}/destroy',   [ClienteController::class, 'destroy'])->name('cliente.destroy');
+Route::get('/cliente/search',         [ClienteController::class, 'search'])->name('cliente.search');
 Route::get('/Cliente', [ClienteController::class, 'index'])
     ->name('Cliente');
 
@@ -40,11 +50,10 @@ Route::get('/AtualizarCliente', [ClienteController::class, 'edit'])
 
 //nutricionista
 
-Route::get('/Perfil', [NutricionistaController::class, 'index'])
-    ->name('Perfil');
-
-Route::get('/CadastroNutricionista', [NutricionistaController::class, 'create'])
-    ->name('CadastroNutricionista');
-
-Route::get('/AtualizarNutricionista', [NutricionistaController::class, 'edit'])
-    ->name('AtualizarNutricionista');   
+Route::get('/nutricionista',                [NutricionistaController::class, 'index'])->name('nutricionista.index');
+Route::get('/nutricionista/create',         [NutricionistaController::class, 'create'])->name('nutricionista.create');
+Route::post('/nutricionista',               [NutricionistaController::class, 'store'])->name('nutricionista.store');
+Route::get('/nutricionista/{id}/view',      [NutricionistaController::class, 'view'])->name('nutricionista.view');
+Route::post('/nutricionista/{id}/update',   [NutricionistaController::class, 'update'])->name('nutricionista.update');
+Route::get('/nutricionista/{id}/destroy',   [NutricionistaController::class, 'destroy'])->name('nutricionista.destroy');
+Route::get('/nutricionista/search',         [NutricionistaController::class, 'search'])->name('nutricionista.search');

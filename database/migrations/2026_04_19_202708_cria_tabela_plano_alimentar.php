@@ -13,8 +13,9 @@ return new class extends Migration
     {
          Schema::create('plano_alimentar', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id_nutricionista')->constrained('users')->cascadeOnDelete();
-            $table->string('nome');
+             $table->foreignId('users_id_nutricionista');
+            $table->foreign('users_id_nutricionista')->references('id')->on('users');
+            $table->string('nome', 100);
             $table->text('descricao');
             $table->date('data_inicio');
             $table->date('data_fim');

@@ -16,7 +16,7 @@
         </span></p>
         
          
-        <a class="btn btn-success btn" href="{{ route('AtualizarNutricionista') }}" style=" align-items: center;"> <i class="bi bi-pencil"></i></a>
+        <a class="btn btn-success btn" href="" style=" align-items: center;"> <i class="bi bi-pencil"></i></a>
 
        
            

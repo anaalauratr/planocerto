@@ -15,6 +15,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+         
         
     </head>
     <body id="page-top" style=" background-color: beige;">
@@ -34,9 +35,17 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive" style="color:  #95b634">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services" >Serviços</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">Sobre</a></li>
-                    
+                       <li class="nav-item">
+    <a class="nav-link" href="#services" style="color: #95b634 !important;">
+        Serviços
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="#about" style="color: #95b634 !important;">
+        Sobre
+    </a>
+</li>
                     </ul>
                 </div>
             </div>
