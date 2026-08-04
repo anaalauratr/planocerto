@@ -2,11 +2,12 @@
 
 @section('content')
 
-<form>
+<form action="{{ route('cliente.store') }}" method="POST">
+    @csrf
 
     <h4 class="mb-4">Cadastro de clientes</h4>
 
-      <!-- nome -->
+    <!-- nome -->
     <div class="input-group mb-3">
         <span class="input-group-text icon-box">
             <i class="fa fa-user"></i>
@@ -15,11 +16,11 @@
         <input
             type="text"
             class="form-control"
+            name="name"
             placeholder="Digite o nome"
+            required
         >
     </div>
-
-     
 
     <!-- email -->
     <div class="input-group mb-3">
@@ -28,9 +29,11 @@
         </span>
 
         <input
-            type="text"
+            type="email"
             class="form-control"
+            name="email"
             placeholder="Digite o email"
+            required
         >
     </div>
 
@@ -43,12 +46,14 @@
         <input
             type="password"
             class="form-control"
+            name="password"
             placeholder="Digite sua senha"
+            required
         >
     </div>
-     
-<!-- objetivo -->
- <div class="input-group mb-3">
+
+    <!-- objetivo -->
+    <div class="input-group mb-3">
         <span class="input-group-text icon-box">
             <i class="bi bi-bullseye"></i>
         </span>
@@ -56,95 +61,98 @@
         <input
             type="text"
             class="form-control"
+            name="objetivo"
             placeholder="Digite o objetivo"
+            required
         >
     </div>
-     <!-- peso -->
-  <div class="input-group mb-3">
-        <span class="input-group-text icon-box">
-            <i class="bi bi-speedometer"></i>
-        </span>
 
-        <input
-            type="text"
-            class="form-control"
-            placeholder="Digite o peso"
-        >
-    </div>
-<!-- altura-->
-     <div class="input-group mb-3">
-        <span class="input-group-text icon-box">
-            <i class="bi bi-rulers"></i>
-        </span>
+   <!-- peso -->
+<div class="input-group mb-3">
+    <span class="input-group-text icon-box">
+        <i class="bi bi-speedometer"></i>
+    </span>
 
-        <input
-            type="text"
-            class="form-control"
-            placeholder="Digite a altura"
-        >
-    </div>
-<!-- data de nascimento -->
-    <div class="col-md-6 mb-3">
-                <label class="form-label">
-        Data de nascimento
-    </label>
-            <div class="input-group">
-
-                <span class="input-group-text icon-box">
-                    <i class="fa fa-calendar"></i>
-                </span>
- 
-                <input
-                    type="date"
-                    class="form-control"
-                    name="data_nascimento"
-                >
-
-            </div>
-
-        </div>
-  <!-- genero -->
-<div class="mb-3">
-    <label class="form-label">Sexo</label>
-
-    <div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="sexo" value="Masculino">
-            <label class="form-check-label">Masculino</label>
-        </div>
-
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="sexo" value="Feminino">
-            <label class="form-check-label">Feminino</label>
-        </div>
-    </div>
+    <input
+        type="number"
+        step="0.01"
+        class="form-control"
+        name="peso"
+        placeholder="Digite o peso"
+        required
+    >
 </div>
 
-  <select name="plano_id" class="form-select " required>
-        <option value="">Selecione um plano</option>
+<!-- altura -->
+<div class="input-group mb-3">
+    <span class="input-group-text icon-box">
+        <i class="bi bi-rulers"></i>
+    </span>
 
-        <option value="1">Plano Emagrecimento</option>
-        <option value="2">Plano Hipertrofia</option>
-        <option value="3">Plano Manutenção</option>
-        <option value="4">Plano Ganho de Massa</option>
-        <option value="5">Plano Reeducação Alimentar</option>
+    <input
+        type="number"
+        step="0.01"
+        class="form-control"
+        name="altura"
+        placeholder="Digite a altura"
+        required
+    >
+</div>
 
-    </select>
+    <!-- data de nascimento -->
+    <div class="col-md-6 mb-3">
+        <label class="form-label">
+            Data de nascimento
+        </label>
+        <div class="input-group">
+            <span class="input-group-text icon-box">
+                <i class="fa fa-calendar"></i>
+            </span>
+
+            <input
+                type="date"
+                class="form-control"
+                name="data_nascimento"
+                required
+            >
+        </div>
+    </div>
+
+    <!-- genero -->
+    <div class="mb-3">
+        <label class="form-label">Sexo</label>
+
+        <div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sexo" value="Masculino" required>
+                <label class="form-check-label">Masculino</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="sexo" value="Feminino">
+                <label class="form-check-label">Feminino</label>
+            </div>
+        </div>
+    </div>
+
+   
+   <!-- plano alimentar -->
+    <div class="mb-3">
+         <label class="form-label">Plano alimentar desse cliente</label>
+        <select name="plano_id" class="form-select" required>
+            <option value="">Selecione um plano</option>
+
+            @foreach($planos as $plano)
+                <option value="{{ $plano->id }}">
+                    {{ $plano->nome }}
+                </option>
+            @endforeach
+        </select>
+    </div>
     <br>
 
-        <button
-            type="button"
-            class="btn btn-login px-4"
-             onclick="window.location.href='{{ route('Cliente') }}'">Cadastrar</button>
-
-    </div>
+    <button type="submit" class="btn btn-login px-4">Cadastrar</button>
 
 </form>
 
-
 @endsection
-
-
-
-
-</div>

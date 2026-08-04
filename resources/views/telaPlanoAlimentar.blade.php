@@ -1,259 +1,157 @@
 @extends('layout.navio')
 
 @section('content')
+
 <link rel="stylesheet" href="{{ asset('css/styles1.css') }}">
 
 <div class="container" style="margin-top: 7%">
 
     <h2>Planos Alimentares</h2>
+ <form class="mb-3" method="GET" action="{{ route('plano.search') }}">
 
-    <!-- Campo de pesquisa -->
-    <input type="text" class="pesquisa" placeholder="Pesquise">
 
-    <a class="btn btn-success" onclick="window.location.href='{{ route('CadastroPlano') }}'">
+    <div class="input-group">
+    <input id="filtro" name="filtro" class="form-control" type="text" placeholder="Pesquisar..." value="{{ $filtro ?? '' }}" autofocus>
+    <button class="btn" type="submit" style="background-color:#95b634; color:#fff;">
+        <i class="bi bi-search"></i>
+    </button>
+    </form>
+</div>
+<br>
+    <a class="btn btn-success" href="{{ route('plano.create') }}">
         NOVO <i class="bi bi-plus-circle"></i>
     </a>
 
+
     <div class="accordion mt-4" id="accordionPlanos">
 
-        <!-- Plano 1 -->
+
+        @foreach ($planos as $plano)
+
         <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne"
-                        aria-expanded="true"
-                        aria-controls="collapseOne">
 
-                    Nome do plano alimentar
-                </button>
-            </h2>
+            <h2 class="accordion-header" id="heading{{ $plano->id }}">
 
-            <div id="collapseOne"
-                 class="accordion-collapse collapse show"
-                 aria-labelledby="headingOne"
-                 data-bs-parent="#accordionPlanos">
-
-                <div class="accordion-body">
-
-                    <p>
-                        <strong>Descrição:</strong> Intuito de emagrecimento...
-                        <br>
-                        <strong>Data de início:</strong> 06/04/2025
-                        <strong>- Fim:</strong> 06/04/2025
-                    </p>
-
-                    <!-- Refeições -->
-                    <div class="refeicao">
-                        <div>
-                            <strong>Café da Manhã</strong>
-                            <p>Calorias</p>
-                            <p>Descrição</p>
-                            <p>07:00</p>
-                        </div>
-
-                        <span class="acoes">
-                            <a href="{{ route('AtualizarRefeicao') }}">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-
-                            <a href="">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                        </span>
-                    </div>
-
-                    <div class="refeicao">
-                        <div>
-                            <strong>Almoço</strong>
-                            <p>Calorias</p>
-                            <p>Descrição</p>
-                            <p>12:00</p>
-                        </div>
-
-                        <span class="acoes">
-                            <a href="{{ route('AtualizarRefeicao') }}">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-
-                            <a href="">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                        </span>
-                    </div>
-
-                    <div class="refeicao">
-                        <div>
-                            <strong>Café da Tarde</strong>
-                            <p>Calorias</p>
-                            <p>Descrição</p>
-                            <p>15:30</p>
-                        </div>
-
-                        <span class="acoes">
-                            <a href="{{ route('AtualizarRefeicao') }}">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-
-                            <a href="">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                        </span>
-                    </div>
-
-                    <div class="refeicao">
-                        <div>
-                            <strong>Jantar</strong>
-                            <p>Calorias</p>
-                            <p>Descrição</p>
-                            <p>19:00</p>
-                        </div>
-
-                        <span class="acoes">
-                            <a href="{{ route('AtualizarRefeicao') }}">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-
-                            <a href="">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                        </span>
-                    </div>
-
-                    <div class="mt-3">
-                        <a class="btn btn-success" href="{{ route('AtualizarPlano') }}">
-                            Editar <i class="bi bi-pencil-square"></i>
-                        </a>
-
-                        <a class="btn btn-success" href="">
-                            Excluir <i class="bi bi-trash3"></i>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Plano 2 -->
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed"
+                <button class="accordion-button"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo"
-                        aria-expanded="false"
-                        aria-controls="collapseTwo">
+                        data-bs-target="#collapse{{ $plano->id }}">
 
-                    Nome do plano alimentar
+                    {{ $plano->nome }}
+
                 </button>
+
             </h2>
 
-            <div id="collapseTwo"
+
+            <div id="collapse{{ $plano->id }}"
                  class="accordion-collapse collapse"
-                 aria-labelledby="headingTwo"
                  data-bs-parent="#accordionPlanos">
+
 
                 <div class="accordion-body">
 
+
                     <p>
-                        <strong>Descrição:</strong> Intuito de emagrecimento...
+                        <strong>Descrição:</strong>
+                        {{ $plano->descricao }}
+
                         <br>
-                        <strong>Data de início:</strong> 06/04/2025
-                        <strong>- Fim:</strong> 06/04/2025
-                    </p>
 
-                    <div class="refeicao">
-                        <div>
-                            <strong>Café da Manhã</strong>
-                            <p>Calorias</p>
-                            <p>Descrição</p>
-                            <p>07:00</p>
-                        </div>
+                       <strong>Início:</strong>
+{{ $plano->data_inicio->format('d/m/Y') }}
 
-                        <span class="acoes">
-                            <a href="{{ route('AtualizarRefeicao') }}">
+<br>
+
+<strong>Fim:</strong>
+{{ $plano->data_fim->format('d/m/Y') }}
+
+                   
+@foreach($plano->refeicoes as $refeicao)
+
+<div class="refeicao">
+
+    <div>
+
+        <strong>{{ $refeicao->nome }}</strong>
+
+        <p>
+            Calorias:
+            {{ $refeicao->calorias }}
+        </p>
+
+        <p>
+            {{ $refeicao->descricao }}
+        </p>
+
+        <p>
+            Horário:
+            {{ $refeicao->horario }}
+        </p>
+        
+
+          <span class="acoes">
+                            <a href="{{ route('plano.refeicao.view', $refeicao->id) }}">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
 
-                            <a href="">
+                            <a href="{{ route('refeicao.destroy', encrypt($refeicao->id)) }}" class=" btn-excluir">
                                 <i class="bi bi-trash3"></i>
                             </a>
                         </span>
-                    </div>
-
-                    <div class="refeicao">
-                        <div>
-                            <strong>Almoço</strong>
-                            <p>Calorias</p>
-                            <p>Descrição</p>
-                            <p>12:00</p>
-                        </div>
-
-                        <span class="acoes">
-                            <a href="{{ route('AtualizarRefeicao') }}">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-
-                            <a href="">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                        </span>
-                    </div>
-
-                    <div class="refeicao">
-                        <div>
-                            <strong>Café da Tarde</strong>
-                            <p>Calorias</p>
-                            <p>Descrição</p>
-                            <p>15:30</p>
-                        </div>
-
-                        <span class="acoes">
-                            <a href="{{ route('AtualizarRefeicao') }}">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-
-                            <a href="">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                        </span>
-                    </div>
-
-                    <div class="refeicao">
-                        <div>
-                            <strong>Jantar</strong>
-                            <p>Calorias</p>
-                            <p>Descrição</p>
-                            <p>19:00</p>
-                        </div>
-
-                        <span class="acoes">
-                            <a href="{{ route('AtualizarRefeicao') }}">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-
-                            <a href="">
-                                <i class="bi bi-trash3"></i>
-                            </a>
-                        </span>
-                    </div>
-
-                    <div class="mt-3">
-                        <a class="btn btn-success" href="{{ route('AtualizarPlano') }}">
-                            Editar <i class="bi bi-pencil-square"></i>
-                        </a>
-
-                        <a class="btn btn-success" href="">
-                            Excluir <i class="bi bi-trash3"></i>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
     </div>
 
 </div>
 
+@endforeach
+
+
+                       
+
+
+
+                   
+                    <div class="mt-3">
+                        <a class="btn btn-success" href="{{ route('plano.view', $plano->id) }}">
+                            Editar <i class="bi bi-pencil-square"></i>
+                        </a>
+
+                        <a class="btn btn-success btn-excluir" href="{{ route('plano.destroy', encrypt($plano->id)) }}">
+                            Excluir <i class="bi bi-trash3"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        @endforeach
+
+
+    </div>
+
+
+</div>
+
+
 @endsection
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var botoesExcluir = document.querySelectorAll('.btn-excluir');
+
+            botoesExcluir.forEach(function (botao) {
+                botao.addEventListener('click', function (event) {
+                    if (!confirm('Tem certeza que deseja excluir isto?')) {
+                        event.preventDefault();
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
+

@@ -2,8 +2,8 @@
 
 @section('content')
 
-   <form action="{{ route('nutricionista.store') }}"
-              method="POST"  class="needs-validation" novalidate enctype="multipart/form-data">
+   <form action="{{ route('register') }}"
+              method="POST"  class="needs-validation" novalidate>
 
             @csrf
     <h4 class="mb-4">Cadastro de nutricionista</h4>
@@ -20,6 +20,8 @@
         name="name"
         placeholder="Nome"
         value="{{ old('name') }}"
+        autocomplete="name"
+        autofocus
         required
     >
 
@@ -41,6 +43,7 @@
         name="email"
         placeholder="Email"
         value="{{ old('email') }}"
+        autocomplete="username"
         required
     >
 
@@ -61,6 +64,7 @@
         id="password"
         name="password"
         placeholder="Senha"
+        autocomplete="new-password"
         required
     >
 
@@ -69,23 +73,34 @@
     </div>
 </div>
 
+<!-- Confirmar Senha -->
+<div class="input-group mb-3">
+    <span class="input-group-text icon-box">
+        <i class="fa fa-lock"></i>
+    </span>
 
-       
-             
+    <input
+        type="password"
+        class="form-control @error('password_confirmation') is-invalid @enderror"
+        id="password_confirmation"
+        name="password_confirmation"
+        placeholder="Confirme a Senha"
+        autocomplete="new-password"
+        required
+    >
+
+    <div class="invalid-feedback">
+        @error('password_confirmation') {{ $message }} @enderror
+    </div>
+</div>
 
             <button type="submit" class="btn btn-login px-4">
                 CADASTRAR
             </button>
-        <a class="btn btn-login px-4" href="{{ route('Login') }}">VOLTAR</a>
-       
+        <a class="btn btn-login px-4" href="{{ route('login') }}">VOLTAR</a>
+
     </div>
 
 </form>
 
-
 @endsection
-
-
-
-
-</div>

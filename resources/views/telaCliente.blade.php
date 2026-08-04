@@ -5,10 +5,17 @@
 
         
 <div class="container" style="margin-top: 7%">
-    <h3 class="nome-plano" style="color: #95b634;">Listagem de clientes</h3>
-    <br> 
-<!-- Campo de pesquisa -->
-    <input type="text" class="pesquisa" placeholder="Pesquise">
+       <h2>Listagem de clientes</h2>
+ <form class="mb-3" method="GET" action="{{ route('cliente.search') }}">
+
+
+    <div class="input-group">
+    <input id="filtro" name="filtro" class="form-control" type="text" placeholder="Pesquisar..." value="{{ $filtro ?? '' }}" autofocus>
+    <button class="btn" type="submit" style="background-color:#95b634; color:#fff;">
+        <i class="bi bi-search"></i>
+    </button>
+    </form>
+</div>
 
      <a class="btn btn-success btn" href="{{ route('cliente.create') }}">NOVO <i class="bi bi-plus-circle"></i></a>
     <!-- Div do plano alimentar -->
@@ -35,7 +42,7 @@
                 
                 
                 <td>{{ $cliente->user->name }}</td>
-                 <td>{{ $cliente->data_nascimento }}</td>
+                 <td>{{ $cliente->data_nascimento->format('d/m/Y') }}</td>
                  <td>{{ $cliente->objetivo }}</td>
 
 
@@ -45,8 +52,8 @@
                             <i class="bi bi-eye"></i>
                         </a>
 
-                        <a href="#">
-                            <i class="bi bi-trash"></i>
+                        <a href="{{ route('cliente.destroy', encrypt($cliente->id)) }}">
+                            <i class="bi bi-trash btn-excluir"></i>
                         </a>
 
                     </td>
@@ -69,3 +76,19 @@
 
 </div>
 @endsection
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var botoesExcluir = document.querySelectorAll('.btn-excluir');
+
+            botoesExcluir.forEach(function (botao) {
+                botao.addEventListener('click', function (event) {
+                    if (!confirm('Tem certeza que deseja excluir esse cliente?')) {
+                        event.preventDefault();
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
+

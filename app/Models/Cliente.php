@@ -23,6 +23,10 @@ class Cliente extends Model
         'altura',
         'sexo'
     ];
+      protected $casts = [
+    'data_nascimento' => 'date',
+    
+];
 
     // Usuário (cliente)
    public function user()

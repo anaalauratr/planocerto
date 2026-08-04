@@ -6,17 +6,17 @@
 <div class="container" style="margin-top: 7%">
     <div style="display: flex; align-items: center; gap: 8px; margin-left: 1%">
     <i class="bi bi-person-circle" style="font-size: 25px; color: #95b634"></i>
-    <h4 class="nome-plano" style="color: #95b634;">Ana Laura</h4>
+    <h4 class="nome-plano" style="color: #95b634;">{{ auth()->user()->name }}</h4>
 </div>
 
     <div class="plano">
            
       <p> <span class="input-group-text icon-box" style="background-color: beige; color: #95b634">
-            <i class="fa fa-envelope"> </i> EMAIL: ana@gmail
+            <i class="fa fa-envelope"> </i>{{ auth()->user()->email }}
         </span></p>
         
          
-        <a class="btn btn-success btn" href="" style=" align-items: center;"> <i class="bi bi-pencil"></i></a>
+        <a class="btn btn-success btn" href="{{ route('nutricionista.view',auth()->user()->id ) }}" style=" align-items: center;"> <i class="bi bi-pencil"></i></a>
 
        
            

@@ -55,7 +55,7 @@
             <div class="container" style="color: #95b634">
                 <div class="masthead-subheading">Acompanhamento nutricional de forma mais simples.</div>
                 <div class="masthead-heading text-uppercase">Controle de dietas para nutricionistas</div>
-                <a class="btn btn-success btn-xl text-uppercase" href="{{url('Login')}}">ENTRAR</a>
+                <a class="btn btn-success btn-xl text-uppercase" href="{{ route('login') }}">ENTRAR</a>
             </div>
         </header>
         <!-- Services-->
@@ -75,8 +75,8 @@
                             <i class="fas fa-circle fa-stack-2x" style="color: #95b634;"></i>
                             <i class="fas fa-user-doctor fa-stack-1x fa-inverse"></i>
                         </span>
-                        <h4 class="my-3">Cadastro de Pacientes</h4>
-                        <p class="text-muted">Armazene informações e acompanhe a evolução nutricional dos pacientes.</p>
+                        <h4 class="my-3">Cadastro de clientes</h4>
+                        <p class="text-muted">Armazene informações e acompanhe a evolução nutricional dos clientes.</p>
                     </div>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
@@ -103,10 +103,10 @@
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 
-                                <h4 class="subheading">Gerenciamento de pacientes</h4>
+                                <h4 class="subheading">Gerenciamento de clientes</h4>
                             </div>
                             <div class="timeline-body"><p class="text-muted">O sistema permite que o nutricionista realize o 
-                                cadastro completo dos pacientes, armazenando informações importantes. Esses dados
+                                cadastro completo dos clientes, armazenando informações importantes. Esses dados
                                  facilitam o acompanhamento individual e ajudam na elaboração de planos alimentares personalizados.</p></div>
                         </div>
                     </li>
@@ -118,7 +118,7 @@
                                 <h4 class="subheading">Elaboração de planos nutricionais</h4>
                             </div>
                             <div class="timeline-body"><p class="text-muted">O nutricionista pode criar planos alimentares espe
-                                cíficos para cada paciente, de acordo com suas necessidades nutricionais e objetivos de saúde. O sistema organiza as refeições, horários e orientações alimentares, tornando o acompanhamento mais prático e eficiente.</p></div>
+                                cíficos para cada cliente, de acordo com suas necessidades nutricionais e objetivos de saúde. O sistema organiza as refeições, horários e orientações alimentares, tornando o acompanhamento mais prático e eficiente.</p></div>
                         </div>
                     </li>
                     <li>
@@ -128,7 +128,7 @@
                                 
                                 <h4 class="subheading">Otimização do tempo</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">O uso do sistema torna o atendimento mais rápido e organizado, permitindo que o nutricionista encontre informações dos pacientes com facilidade e
+                            <div class="timeline-body"><p class="text-muted">O uso do sistema torna o atendimento mais rápido e organizado, permitindo que o nutricionista encontre informações dos clientes com facilidade e
                                  realize suas atividades de forma mais eficiente. .</p></div>
                         </div>
                     </li>
@@ -139,7 +139,7 @@
                                 
                                 <h4 class="subheading">Armazenamento de dados</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">O sistema PlanoCerto é um site seguro que garante a proteção das informações cadastradas pelos nutricionistas e pacientes.</p></div>
+                            <div class="timeline-body"><p class="text-muted">O sistema PlanoCerto é um site seguro que garante a proteção das informações cadastradas pelos nutricionistas e clientes.</p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">

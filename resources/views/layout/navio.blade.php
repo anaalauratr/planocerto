@@ -133,6 +133,20 @@ html, body {
 a {
   color: white;
 }
+.item-menu form {
+    display: flex;
+    align-items: center;
+}
+
+.item-menu button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    color: inherit;
+}
 </style>
 
 </head>
@@ -163,8 +177,26 @@ a {
 </nav>
 
 <!-- CONTEÚDO DAS PÁGINAS -->
+ <div class="container" style="margin-top: 100px;">
+       @if(session()->has('msg'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session()->get('msg') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
 
-@yield('content')
+                        @if(session()->has('erro'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session()->get('erro') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
+    @yield('content')
+
+</div>
+
+
 
 <!-- SCRIPT MENU -->
 
@@ -201,11 +233,29 @@ menuLateral.innerHTML = `
     <i class="bi bi-clipboard2-check-fill"></i>
     <a   href="{{ route('Principal') }}"> Planos Alimentares </a>
   </div>
+     
+@if(Auth::id() == 71)
+<div class="item-menu">
+    <i class="bi bi-people-fill"></i>
+    <a href="{{ route('usuario.index') }}"> Usuários </a>
+</div>
+@endif
 
-  <div class="item-menu sair">
+
+ <div class="item-menu sair">
+
     <i class="bi bi-door-open"></i>
-    <span> <a href="/">Sair</a></span>
-  </div>
+
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+
+        <button type="submit">
+            Sair
+        </button>
+
+    </form>
+
+</div>
 
 </div>
 
@@ -232,7 +282,7 @@ menuAberto = false;
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+@yield('script')
 </body>
 </html>
 
