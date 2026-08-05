@@ -101,7 +101,7 @@ class UserController extends Controller
     public function search(Request $request)
     {
         $filtro = trim((string) $request->input('filtro', ''));
-        $usuarios = User::where('id', '!=', 1)
+        $usuarios = User::where('id', '!=', 71)
                        ->where('name', 'like', "%{$filtro}%")
                        ->orWhere('email', 'like', "%{$filtro}%")
                        ->orWhere('tipo_usuario', 'like', "%{$filtro}%")

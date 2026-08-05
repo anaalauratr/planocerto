@@ -187,12 +187,6 @@ $plano->data_fim    = $request->data_fim;
 
 
 
-
-
-
-
-
-
      public function destroy($id) {
         try {
             // Descobre qual plano deve ser apagado

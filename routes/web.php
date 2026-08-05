@@ -8,11 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\PasswordController;
 
-/*
-|--------------------------------------------------------------------------
-| Página inicial
-|--------------------------------------------------------------------------
-*/
+/*| Página inicial*/
  
 Route::get('/', function () {
     return view('inicial');
@@ -26,9 +22,7 @@ Route::get('/dashboard', function () {
 
 
 /*
-|--------------------------------------------------------------------------
 | Cadastro público de nutricionista
-|--------------------------------------------------------------------------
 */
 
 Route::get('/nutricionista/create', 
@@ -37,21 +31,15 @@ Route::get('/nutricionista/create',
 
 
 
-
-
 /*
-|--------------------------------------------------------------------------
 | Rotas protegidas
-|--------------------------------------------------------------------------
 */
 
 Route::middleware('auth')->group(function () {
 
 
     /*
-    |------------------------------------------------------
     | Perfil
-    |------------------------------------------------------
     */
 
     Route::get('/perfil', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -60,9 +48,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/perfil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     /*
-    |------------------------------------------------------
+    
     | Planos Alimentares
-    |------------------------------------------------------
+    
     */
 
    Route::get('/Principal', [PlanoController::class, 'index'])
@@ -84,11 +72,9 @@ Route::post('/refeicao/{id}/update',   [PlanoController::class, 'updateRefeicao'
       Route::get('/plano/search',         [PlanoController::class, 'search'])->name('plano.search');
 
     /*
-
     
-    |------------------------------------------------------
     | Clientes
-    |------------------------------------------------------
+  
     */
 
     Route::get('/cliente',                [ClienteController::class, 'index'])->name('cliente.index');
@@ -101,9 +87,9 @@ Route::post('/refeicao/{id}/update',   [PlanoController::class, 'updateRefeicao'
 
     /*
 
-|------------------------------------------------------
+
     | Usuarios, para administrador acessar
-    |------------------------------------------------------
+  
     */
 
     Route::get('/usuario',                [UserController::class, 'index'])->name('usuario.index');
@@ -113,12 +99,9 @@ Route::post('/refeicao/{id}/update',   [PlanoController::class, 'updateRefeicao'
     Route::get('/usuario/search',         [UserController::class, 'search'])->name('usuario.search');
 
     /*
-
-
-
-    |------------------------------------------------------
+    
     | Nutricionistas
-    |------------------------------------------------------
+   
     */
 
 
@@ -134,10 +117,6 @@ Route::get('/nutricionista/{id}/view',
 
 });
 
-/*
-|--------------------------------------------------------------------------
-| Rotas do Breeze
-|--------------------------------------------------------------------------
-*/
+
 
 require __DIR__.'/auth.php';
