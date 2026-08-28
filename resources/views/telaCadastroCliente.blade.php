@@ -18,8 +18,7 @@
             class="form-control"
             name="name"
             placeholder="Digite o nome"
-            required
-        >
+            required>
     </div>
 
     <!-- email -->
@@ -33,8 +32,7 @@
             class="form-control"
             name="email"
             placeholder="Digite o email"
-            required
-        >
+            required>
     </div>
 
     <!-- senha -->
@@ -48,8 +46,7 @@
             class="form-control"
             name="password"
             placeholder="Digite sua senha"
-            required
-        >
+            required>
     </div>
 
     <!-- objetivo -->
@@ -63,41 +60,38 @@
             class="form-control"
             name="objetivo"
             placeholder="Digite o objetivo"
-            required
-        >
+            required>
     </div>
 
-   <!-- peso -->
-<div class="input-group mb-3">
-    <span class="input-group-text icon-box">
-        <i class="bi bi-speedometer"></i>
-    </span>
+    <!-- peso -->
+    <div class="input-group mb-3">
+        <span class="input-group-text icon-box">
+            <i class="bi bi-speedometer"></i>
+        </span>
 
-    <input
-        type="number"
-        step="0.01"
-        class="form-control"
-        name="peso"
-        placeholder="Digite o peso"
-        required
-    >
-</div>
+        <input
+            type="number"
+            step="0.01"
+            class="form-control"
+            name="peso"
+            placeholder="Digite o peso"
+            required>
+    </div>
 
-<!-- altura -->
-<div class="input-group mb-3">
-    <span class="input-group-text icon-box">
-        <i class="bi bi-rulers"></i>
-    </span>
+    <!-- altura -->
+    <div class="input-group mb-3">
+        <span class="input-group-text icon-box">
+            <i class="bi bi-rulers"></i>
+        </span>
 
-    <input
-        type="number"
-        step="0.01"
-        class="form-control"
-        name="altura"
-        placeholder="Digite a altura"
-        required
-    >
-</div>
+        <input
+            type="number"
+            step="0.01"
+            class="form-control"
+            name="altura"
+            placeholder="Digite a altura"
+            required>
+    </div>
 
     <!-- data de nascimento -->
     <div class="col-md-6 mb-3">
@@ -113,8 +107,7 @@
                 type="date"
                 class="form-control"
                 name="data_nascimento"
-                required
-            >
+                required>
         </div>
     </div>
 
@@ -135,17 +128,17 @@
         </div>
     </div>
 
-   
-   <!-- plano alimentar -->
+
+    <!-- plano alimentar -->
     <div class="mb-3">
-         <label class="form-label">Plano alimentar desse cliente</label>
+        <label class="form-label">Plano alimentar desse cliente</label>
         <select name="plano_id" class="form-select" required>
             <option value="">Selecione um plano</option>
 
             @foreach($planos as $plano)
-                <option value="{{ $plano->id }}">
-                    {{ $plano->nome }}
-                </option>
+            <option value="{{ $plano->id }}">
+                {{ $plano->nome }}
+            </option>
             @endforeach
         </select>
     </div>

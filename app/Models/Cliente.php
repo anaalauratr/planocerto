@@ -23,16 +23,16 @@ class Cliente extends Model
         'altura',
         'sexo'
     ];
-      protected $casts = [
-    'data_nascimento' => 'date',
-    
-];
+    protected $casts = [
+        'data_nascimento' => 'date',
+
+    ];
 
     // Usuário (cliente)
-   public function user()
-{
-    return $this->belongsTo(User::class, 'users_id');
-}
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id');
+    }
 
     // Plano alimentar
     public function planoAlimentar()

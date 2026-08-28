@@ -3,7 +3,7 @@
 @section('content')
 
 <form action="{{ route('plano.store') }}"
-      method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+    method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
 
     @csrf
 
@@ -23,8 +23,7 @@
             placeholder="Nome do plano alimentar"
             name="nome"
             value="{{ old('nome') }}"
-            required
-        >
+            required>
 
         <div class="invalid-feedback">
             @error('nome') {{ $message }} @enderror
@@ -46,8 +45,7 @@
             placeholder="Descrição"
             name="descricao"
             value="{{ old('descricao') }}"
-            required
-        >
+            required>
 
         <div class="invalid-feedback">
             @error('descricao') {{ $message }} @enderror
@@ -74,8 +72,7 @@
                     id="data_inicio"
                     name="data_inicio"
                     value="{{ old('data_inicio') }}"
-                    required
-                >
+                    required>
 
                 <div class="invalid-feedback">
                     @error('data_inicio') {{ $message }} @enderror
@@ -101,8 +98,7 @@
                     id="data_fim"
                     name="data_fim"
                     value="{{ old('data_fim') }}"
-                    required
-                >
+                    required>
 
                 <div class="invalid-feedback">
                     @error('data_fim') {{ $message }} @enderror
@@ -134,8 +130,7 @@
                         placeholder="Nome"
                         name="refeicoes[0][nome]"
                         value="{{ old('refeicoes.0.nome') }}"
-                        required
-                    >
+                        required>
 
                     <div class="invalid-feedback">
                         @error('refeicoes.0.nome') {{ $message }} @enderror
@@ -155,8 +150,7 @@
                         placeholder="Descrição da refeição"
                         name="refeicoes[0][descricao]"
                         rows="3"
-                        required
-                    >{{ old('refeicoes.0.descricao') }}</textarea>
+                        required>{{ old('refeicoes.0.descricao') }}</textarea>
 
                     <div class="invalid-feedback">
                         @error('refeicoes.0.descricao') {{ $message }} @enderror
@@ -177,8 +171,7 @@
                         placeholder="Calorias"
                         name="refeicoes[0][calorias]"
                         value="{{ old('refeicoes.0.calorias') }}"
-                        required
-                    >
+                        required>
 
                     <div class="invalid-feedback">
                         @error('refeicoes.0.calorias') {{ $message }} @enderror
@@ -193,8 +186,7 @@
                         class="form-control @error('refeicoes.0.horario') is-invalid @enderror"
                         name="refeicoes[0][horario]"
                         value="{{ old('refeicoes.0.horario') }}"
-                        required
-                    >
+                        required>
 
                     <div class="invalid-feedback">
                         @error('refeicoes.0.horario') {{ $message }} @enderror
@@ -207,8 +199,7 @@
                     <button
                         type="button"
                         class="btn btn-danger"
-                        onclick="removerRefeicao(this)"
-                    >
+                        onclick="removerRefeicao(this)">
                         <i class="bi bi-trash3"></i>
                     </button>
 
@@ -245,16 +236,15 @@
 @endsection
 
 <script>
+    let contador = 1;
 
-let contador = 1;
+    function adicionarRefeicao() {
 
-function adicionarRefeicao() {
-
-    let container = document.getElementById("lista-refeicoes");
-    let nova = document.createElement("div");
-    nova.className = "refeicao-item mb-4";
-    nova.style = "border: 1px solid #95b634; border-radius: 8px; padding: 2%";
-    nova.innerHTML = `
+        let container = document.getElementById("lista-refeicoes");
+        let nova = document.createElement("div");
+        nova.className = "refeicao-item mb-4";
+        nova.style = "border: 1px solid #95b634; border-radius: 8px; padding: 2%";
+        nova.innerHTML = `
         <div class="row mb-2">
 
             <!-- Nome -->
@@ -265,8 +255,7 @@ function adicionarRefeicao() {
                     class="form-control"
                     placeholder="Nome"
                     name="refeicoes[${contador}][nome]"
-                    required
-                >
+                    required>
 
             </div>
 
@@ -327,29 +316,28 @@ function adicionarRefeicao() {
 
     `;
 
-    container.appendChild(nova);
+        container.appendChild(nova);
 
-    contador++;
+        contador++;
 
-}
+    }
 
-function removerRefeicao(botao) {
-    botao.closest(".refeicao-item").remove();
-}
+    function removerRefeicao(botao) {
+        botao.closest(".refeicao-item").remove();
+    }
 
-// Validação Bootstrap (needs-validation)
-(() => {
-    'use strict'
-    const forms = document.querySelectorAll('.needs-validation')
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-            }
-            form.classList.add('was-validated')
-        }, false)
-    })
-})()
-
+    // Validação Bootstrap (needs-validation)
+    (() => {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
 </script>

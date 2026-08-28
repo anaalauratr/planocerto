@@ -3,7 +3,7 @@
 @section('content')
 
 <form action="{{ route('refeicao.update', $refeicao->id) }}"
-      method="POST" class="needs-validation" novalidate>
+    method="POST" class="needs-validation" novalidate>
 
     @csrf
 
@@ -31,8 +31,7 @@
                     placeholder="Nome"
                     name="nome"
                     value="{{ old('nome', $refeicao->nome) }}"
-                    required
-                >
+                    required>
 
                 <div class="invalid-feedback">
                     @error('nome') {{ $message }} @enderror
@@ -65,8 +64,7 @@
                     placeholder="Descrição da refeição"
                     name="descricao"
                     rows="3"
-                    required
-                >{{ old('descricao', $refeicao->descricao) }}</textarea>
+                    required>{{ old('descricao', $refeicao->descricao) }}</textarea>
 
                 <div class="invalid-feedback">
                     @error('descricao') {{ $message }} @enderror
@@ -100,8 +98,7 @@
                     placeholder="Calorias"
                     name="calorias"
                     value="{{ old('calorias', $refeicao->calorias) }}"
-                    required
-                >
+                    required>
 
                 <div class="invalid-feedback">
                     @error('calorias') {{ $message }} @enderror
@@ -129,8 +126,7 @@
                     id="horario"
                     name="horario"
                     value="{{ old('horario', $refeicao->horario) }}"
-                    required
-                >
+                    required>
 
                 <div class="invalid-feedback">
                     @error('horario') {{ $message }} @enderror

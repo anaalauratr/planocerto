@@ -15,16 +15,15 @@ return new class extends Migration
             $table->id();
             $table->foreignId('users_id');
             $table->foreign('users_id')->references('id')->on('users');
-             $table->foreignId('plano_alimentar_id');
-            $table->foreign('plano_alimentar_id')->references('id')->on('plano_alimentar');
-            
-         
+
+            $table->foreignId('plano_alimentar_id')->nullable()->constrained('plano_alimentar');
+
             $table->text('objetivo');
             $table->date('data_nascimento');
             $table->float('peso');
             $table->float('altura');
-             $table->enum('sexo', ['Masculino','Feminino' ]);
-             $table->timestamps();
+            $table->enum('sexo', ['Masculino', 'Feminino']);
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-         Schema::dropIfExists('relacao_cliente');
+        Schema::dropIfExists('relacao_cliente');
     }
 };

@@ -7,132 +7,133 @@
 <div class="container" style="margin-top: 7%">
 
     <h2>Planos Alimentares</h2>
- <form class="mb-3" method="GET" action="{{ route('plano.search') }}">
+    <form class="mb-3" method="GET" action="{{ route('plano.search') }}">
 
 
-    <div class="input-group">
-    <input id="filtro" name="filtro" class="form-control" type="text" placeholder="Pesquisar..." value="{{ $filtro ?? '' }}" autofocus>
-    <button class="btn" type="submit" style="background-color:#95b634; color:#fff;">
-        <i class="bi bi-search"></i>
-    </button>
+        <div class="input-group">
+            <input id="filtro" name="filtro" class="form-control" type="text" placeholder="Pesquisar..." value="{{ $filtro ?? '' }}" autofocus>
+            <button class="btn" type="submit" style="background-color:#95b634; color:#fff;">
+                <i class="bi bi-search"></i>
+            </button>
     </form>
 </div>
 <br>
-    <a class="btn btn-success" href="{{ route('plano.create') }}">
-        NOVO <i class="bi bi-plus-circle"></i>
-    </a>
+<a class="btn btn-success" href="{{ route('plano.create') }}">
+    NOVO <i class="bi bi-plus-circle"></i>
+</a>
 
 
-    <div class="accordion mt-4" id="accordionPlanos">
+<div class="accordion mt-4" id="accordionPlanos">
 
 
-        @foreach ($planos as $plano)
+    @foreach ($planos as $plano)
 
-        <div class="accordion-item">
+    <div class="accordion-item">
 
-            <h2 class="accordion-header" id="heading{{ $plano->id }}">
+        <h2 class="accordion-header" id="heading{{ $plano->id }}">
 
-                <button class="accordion-button"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapse{{ $plano->id }}">
+            <button class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse{{ $plano->id }}">
 
-                    {{ $plano->nome }}
+                {{ $plano->nome }}
 
-                </button>
+            </button>
 
-            </h2>
-
-
-            <div id="collapse{{ $plano->id }}"
-                 class="accordion-collapse collapse"
-                 data-bs-parent="#accordionPlanos">
+        </h2>
 
 
-                <div class="accordion-body">
+        <div id="collapse{{ $plano->id }}"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionPlanos">
 
 
-                    <p>
-                        <strong>Descrição:</strong>
-                        {{ $plano->descricao }}
+            <div class="accordion-body">
 
-                        <br>
 
-                       <strong>Início:</strong>
-{{ $plano->data_inicio->format('d/m/Y') }}
+                <p>
+                    <strong>Descrição:</strong>
+                    {{ $plano->descricao }}
 
-<br>
+                    <br>
 
-<strong>Fim:</strong>
-{{ $plano->data_fim->format('d/m/Y') }}
+                    <strong>Início:</strong>
+                    {{ $plano->data_inicio->format('d/m/Y') }}
 
-                   
-@foreach($plano->refeicoes as $refeicao)
+                    <br>
 
-<div class="refeicao">
+                    <strong>Fim:</strong>
+                    {{ $plano->data_fim->format('d/m/Y') }}
 
-    <div>
 
-        <strong>{{ $refeicao->nome }}</strong>
+                    @foreach($plano->refeicoes as $refeicao)
 
-        <p>
-            Calorias:
-            {{ $refeicao->calorias }}
-        </p>
+                <div class="refeicao">
 
-        <p>
-            {{ $refeicao->descricao }}
-        </p>
+                    <div>
 
-        <p>
-            Horário:
-            {{ $refeicao->horario }}
-        </p>
-        
+                        <strong>{{ $refeicao->nome }}</strong>
 
-          <span class="acoes">
+                        <p>
+                            Calorias:
+                            {{ $refeicao->calorias }}
+                        </p>
+
+                        <p>
+                            {{ $refeicao->descricao }}
+                        </p>
+
+                        <p>
+                            Horário:
+                            {{ $refeicao->horario }}
+                        </p>
+
+
+                        <span class="acoes">
                             <a href="{{ route('plano.refeicao.view', $refeicao->id) }}">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
 
-                            <a href="{{ route('refeicao.destroy', encrypt($refeicao->id)) }}" class=" btn-excluir">
+                            <a href="{{ route('refeicao.destroy', encrypt($refeicao->id)) }}"
+                                class="btn-excluir-refeicao">
                                 <i class="bi bi-trash3"></i>
                             </a>
                         </span>
-    </div>
-
-</div>
-
-@endforeach
-
-
-                       
-
-
-
-                   
-                    <div class="mt-3">
-                        <a class="btn btn-success" href="{{ route('plano.view', $plano->id) }}">
-                            Editar <i class="bi bi-pencil-square"></i>
-                        </a>
-
-                        <a class="btn btn-success btn-excluir" href="{{ route('plano.destroy', encrypt($plano->id)) }}">
-                            Excluir <i class="bi bi-trash3"></i>
-                        </a>
                     </div>
 
                 </div>
 
-            </div>
+                @endforeach
 
+
+
+
+
+
+
+                <div class="mt-3">
+                    <a class="btn btn-success" href="{{ route('plano.view', $plano->id) }}">
+                        Editar <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a href="{{ route('plano.destroy', encrypt($plano->id)) }}"
+                        class="btn btn-success btn-excluir-plano">
+                        Excluir <i class="bi bi-trash3"></i>
+                    </a>
+                </div>
+
+            </div>
 
         </div>
 
 
-        @endforeach
-
-
     </div>
+
+
+    @endforeach
+
+
+</div>
 
 
 </div>
@@ -140,18 +141,41 @@
 
 @endsection
 @section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var botoesExcluir = document.querySelectorAll('.btn-excluir');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
 
-            botoesExcluir.forEach(function (botao) {
-                botao.addEventListener('click', function (event) {
-                    if (!confirm('Tem certeza que deseja excluir isto?')) {
-                        event.preventDefault();
-                    }
-                });
+        // Excluir refeição
+        var botoesExcluirRefeicao = document.querySelectorAll('.btn-excluir-refeicao');
+
+        botoesExcluirRefeicao.forEach(function(botao) {
+            botao.addEventListener('click', function(event) {
+
+                if (!confirm('Tem certeza que deseja excluir esta refeição?')) {
+                    event.preventDefault();
+                }
+
             });
         });
-    </script>
-@endsection
 
+
+        // Excluir plano
+        var botoesExcluirPlano = document.querySelectorAll('.btn-excluir-plano');
+
+        botoesExcluirPlano.forEach(function(botao) {
+            botao.addEventListener('click', function(event) {
+
+                if (!confirm(
+                        'ATENÇÃO!\n\n' +
+                        'Este plano alimentar pode estar sendo utilizado por clientes.\n\n' +
+                        'Ao excluir este plano, os clientes que utilizam este plano também serão excluídos.\n\n' +
+                        'Tem certeza que deseja continuar?'
+                    )) {
+                    event.preventDefault();
+                }
+
+            });
+        });
+
+    });
+</script>
+@endsection

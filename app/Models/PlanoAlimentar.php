@@ -24,9 +24,9 @@ class PlanoAlimentar extends Model
     ];
 
     protected $casts = [
-    'data_inicio' => 'date',
-    'data_fim' => 'date',
-];
+        'data_inicio' => 'date',
+        'data_fim' => 'date',
+    ];
 
     // Nutricionista
     public function nutricionista()

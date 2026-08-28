@@ -3,51 +3,42 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/styles1.css') }}">
 
-        
+
 <div class="container" style="margin-top: 7%">
-       <h2>Listagem de usuario</h2>
- <form class="mb-3" method="GET" action="{{ route('usuario.search') }}">
+    <h2>Listagem de usuario</h2>
+    <form class="mb-3" method="GET" action="{{ route('usuario.search') }}">
 
 
-    <div class="input-group">
-    <input id="filtro" name="filtro" class="form-control" type="text" placeholder="Pesquisar..." value="{{ $filtro ?? '' }}" autofocus>
-    <button class="btn" type="submit" style="background-color:#95b634; color:#fff;">
-        <i class="bi bi-search"></i>
-    </button>
+        <div class="input-group">
+            <input id="filtro" name="filtro" class="form-control" type="text" placeholder="Pesquisar..." value="{{ $filtro ?? '' }}" autofocus>
+            <button class="btn" type="submit" style="background-color:#95b634; color:#fff;">
+                <i class="bi bi-search"></i>
+            </button>
     </form>
 </div>
 
-    <!-- Div do plano alimentar -->
-    <div class="plano">
+<!-- Div do plano alimentar -->
 
-   <div class="table-responsive">
-    <table class="table table-bordered">
-
+<div class="plano">
+    <div class="table-responsive">
+        <table class="table table-bordered tabela-usuarios">
             <thead>
                 <tr>
                     <th>Nome</th>
                     <th>Email</th>
-                     <th>Tipo usuario</th>
-                
+                    <th>Tipo usuário</th>
                     <th>Ações</th>
                 </tr>
             </thead>
 
             <tbody>
-
+                @foreach ($usuarios as $usuario)
                 <tr>
-                     @foreach ($usuarios as $usuario)
-            <tr>
-                
-                
-                <td>{{ $usuario->name }}</td>
-                 <td>{{ $usuario->email}}</td>
-                 <td>{{ $usuario->tipo_usuario}}</td>
-                
+                    <td>{{ $usuario->name }}</td>
+                    <td>{{ $usuario->email }}</td>
+                    <td>{{ $usuario->tipo_usuario }}</td>
 
-
-                  <td class="acoes">
-
+                    <td class="acoes">
                         <a href="{{ route('usuario.view', $usuario->id) }}">
                             <i class="bi bi-eye"></i>
                         </a>
@@ -55,40 +46,49 @@
                         <a href="{{ route('usuario.destroy', encrypt($usuario->id)) }}">
                             <i class="bi bi-trash btn-excluir"></i>
                         </a>
-
                     </td>
-
-        
-                
-            </tr>
-        @endforeach
-
-                    
-
-                   
-                
-
+                </tr>
+                @endforeach
             </tbody>
-
         </table>
-
     </div>
-
 </div>
+
 @endsection
 @section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var botoesExcluir = document.querySelectorAll('.btn-excluir');
 
-            botoesExcluir.forEach(function (botao) {
-                botao.addEventListener('click', function (event) {
-                    if (!confirm('Tem certeza que deseja excluir esse usuario?')) {
-                        event.preventDefault();
-                    }
-                });
-            });
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    var botoesExcluir = document.querySelectorAll('.btn-excluir');
+
+    botoesExcluir.forEach(function(botao) {
+
+        botao.addEventListener('click', function(event) {
+
+            var tipoUsuario = this.closest('tr') .querySelector('td:nth-child(3)') .textContent.trim();
+
+            var mensagem;
+
+            if (tipoUsuario === 'Nutricionista') {
+
+                mensagem = "ATENÇÃO!\n\n" +
+                    "Tem certeza que deseja excluir este nutricionista?\n\n" +
+                    "Ao excluir este usuário, todos os seus clientes e planos alimentares poderão ser perdidos.\n\n" +
+                    "Deseja realmente continuar?";
+
+            } else {
+
+                mensagem = "Tem certeza que deseja excluir esse cliente?";}
+            if (!confirm(mensagem)) {
+                event.preventDefault();
+            }
+
         });
-    </script>
-@endsection
 
+    });
+
+});
+</script>
+
+@endsection

@@ -13,27 +13,27 @@ use App\Models\User;
 
 class NutricionistaController extends Controller
 {
-      public function index()
-    { 
- 
-    $usuario = Auth::user();
+    public function index()
+    {
 
-    return view('telaPerfil', [
-        'usuario' => $usuario
-    ]);
-}
-    
-     public function create()
-{
-    return view('telaCadastroNutricionista');
-}
+        $usuario = Auth::user();
 
-public function view($id)
-{
-    $nutricionista = User::find($id);
+        return view('telaPerfil', [
+            'usuario' => $usuario
+        ]);
+    }
 
-    return view('atualizarNutricionista', [
-        'nutricionista' => $nutricionista
-    ]);
-}
+    public function create()
+    {
+        return view('telaCadastroNutricionista');
+    }
+
+    public function view($id)
+    {
+        $nutricionista = User::find($id);
+
+        return view('atualizarNutricionista', [
+            'nutricionista' => $nutricionista
+        ]);
+    }
 }

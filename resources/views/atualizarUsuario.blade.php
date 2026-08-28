@@ -3,10 +3,10 @@
 @section('content')
 
 <form action="{{ route('usuario.update', $usuario->id) }}"
-      method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+    method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
 
     @csrf
-    
+
 
     <h4 class="mb-4">Atualizar dados de usuarios</h4>
 
@@ -23,8 +23,7 @@
             name="name"
             placeholder="Digite o nome"
             value="{{ old('name', $usuario->name) }}"
-            required
-        >
+            required>
 
         <div class="invalid-feedback">
             @error('name') {{ $message }} @enderror
@@ -44,32 +43,30 @@
             name="email"
             placeholder="Digite o email"
             value="{{ old('email', $usuario->email) }}"
-            required
-        >
+            required>
 
         <div class="invalid-feedback">
             @error('email') {{ $message }} @enderror
         </div>
     </div>
-  <!-- senha -->
-<div class="input-group mb-3">
-    <span class="input-group-text icon-box">
-        <i class="fa fa-lock"></i>
-    </span>
+    <!-- senha -->
+    <div class="input-group mb-3">
+        <span class="input-group-text icon-box">
+            <i class="fa fa-lock"></i>
+        </span>
 
-    <input
-        type="password"
-        class="form-control @error('password') is-invalid @enderror"
-        id="password"
-        name="password"
-        placeholder="Digite a nova senha, caso nao queira mudar deixe em branco"
-    >
+        <input
+            type="password"
+            class="form-control @error('password') is-invalid @enderror"
+            id="password"
+            name="password"
+            placeholder="Digite a nova senha, caso nao queira mudar deixe em branco">
 
-    <div class="invalid-feedback">
-        @error('password') {{ $message }} @enderror
+        <div class="invalid-feedback">
+            @error('password') {{ $message }} @enderror
+        </div>
     </div>
-</div>
-      
+
     <!-- Botao salvar -->
     <div class="text-end">
         <button type="submit" class="btn btn-login px-4">

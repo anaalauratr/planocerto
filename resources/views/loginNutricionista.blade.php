@@ -9,73 +9,69 @@
 
     <!-- EMAIL -->
     <div class="input-group mb-3">
-    <span class="input-group-text icon-box">
-        <i class="fa fa-user"></i>
-    </span>
+        <span class="input-group-text icon-box">
+            <i class="fa fa-user"></i>
+        </span>
 
-    <input
-        type="email"
-        name="email"
-        class="form-control @error('email') is-invalid @enderror"
-        placeholder="Email"
-        value="{{ old('email') }}"
-        required
-        autofocus
-    >
+        <input
+            type="email"
+            name="email"
+            class="form-control @error('email') is-invalid @enderror"
+            placeholder="Email"
+            value="{{ old('email') }}"
+            required
+            autofocus>
 
-    @error('email')
+        @error('email')
         <div class="invalid-feedback">
             {{ $message }}
         </div>
-    @enderror
-</div>
+        @enderror
+    </div>
 
     <!-- PASSWORD -->
     <div class="input-group mb-3">
-    <span class="input-group-text icon-box">
-        <i class="fa fa-lock"></i>
-    </span>
+        <span class="input-group-text icon-box">
+            <i class="fa fa-lock"></i>
+        </span>
 
-    <input
-        type="password"
-        name="password"
-        class="form-control @error('password') is-invalid @enderror"
-        placeholder="Senha"
-        required
-    >
+        <input
+            type="password"
+            name="password"
+            class="form-control @error('password') is-invalid @enderror"
+            placeholder="Senha"
+            required>
 
-    @error('password')
+        @error('password')
         <div class="invalid-feedback">
             {{ $message }}
         </div>
-    @enderror
-</div>
+        @enderror
+    </div>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
 
         <div class="form-check">
-           <input
-    class="form-check-input"
-    type="checkbox"
-    id="remember"
-    name="remember"
->
+            <input
+                class="form-check-input"
+                type="checkbox"
+                id="remember"
+                name="remember">
 
             <label
                 class="form-check-label"
-                for="remember"
-            >
+                for="remember">
                 Save Password
             </label>
         </div>
 
-       <button
-    type="submit"
-    class="btn btn-login px-4">
+        <button
+            type="submit"
+            class="btn btn-login px-4">
 
-    ENTRAR
+            ENTRAR
 
-</button>
+        </button>
 
     </div>
 
@@ -97,7 +93,7 @@
         CADASTRE-SE
 
     </button>
-@endsection
+    @endsection
 
 
 

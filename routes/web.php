@@ -9,7 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\PasswordController;
 
 /*| Página inicial*/
- 
+
 Route::get('/', function () {
     return view('inicial');
 });
@@ -25,7 +25,8 @@ Route::get('/dashboard', function () {
 | Cadastro público de nutricionista
 */
 
-Route::get('/nutricionista/create', 
+Route::get(
+    '/nutricionista/create',
     [NutricionistaController::class, 'create']
 )->name('nutricionista.create');
 
@@ -53,23 +54,23 @@ Route::middleware('auth')->group(function () {
     
     */
 
-   Route::get('/Principal', [PlanoController::class, 'index'])
-    ->name('Principal');
+    Route::get('/Principal', [PlanoController::class, 'index'])
+        ->name('Principal');
 
-Route::get('/plano/create', [PlanoController::class, 'create'])
-    ->name('plano.create');
-     Route::post('/plano',               [PlanoController::class, 'store'])->name('plano.store');
+    Route::get('/plano/create', [PlanoController::class, 'create'])
+        ->name('plano.create');
+    Route::post('/plano',               [PlanoController::class, 'store'])->name('plano.store');
 
-Route::get('/plano/{id}/view', [PlanoController::class, 'view'])
-    ->name('plano.view');
-Route::post('/plano/{id}/update',   [PlanoController::class, 'update'])->name('plano.update');
+    Route::get('/plano/{id}/view', [PlanoController::class, 'view'])
+        ->name('plano.view');
+    Route::post('/plano/{id}/update',   [PlanoController::class, 'update'])->name('plano.update');
 
-Route::get('/plano/{id}/refeicao', [PlanoController::class, 'viewRefeicao'])
-    ->name('plano.refeicao.view');
-Route::post('/refeicao/{id}/update',   [PlanoController::class, 'updateRefeicao'])->name('refeicao.update');
+    Route::get('/plano/{id}/refeicao', [PlanoController::class, 'viewRefeicao'])
+        ->name('plano.refeicao.view');
+    Route::post('/refeicao/{id}/update',   [PlanoController::class, 'updateRefeicao'])->name('refeicao.update');
     Route::get('/plano/{id}/destroy',   [PlanoController::class, 'destroy'])->name('plano.destroy');
-     Route::get('/refeicao/{id}/destroy',   [PlanoController::class, 'destroyRefeicao'])->name('refeicao.destroy');
-      Route::get('/plano/search',         [PlanoController::class, 'search'])->name('plano.search');
+    Route::get('/refeicao/{id}/destroy',   [PlanoController::class, 'destroyRefeicao'])->name('refeicao.destroy');
+    Route::get('/plano/search',         [PlanoController::class, 'search'])->name('plano.search');
 
     /*
     
@@ -86,8 +87,6 @@ Route::post('/refeicao/{id}/update',   [PlanoController::class, 'updateRefeicao'
     Route::get('/cliente/search',         [ClienteController::class, 'search'])->name('cliente.search');
 
     /*
-
-
     | Usuarios, para administrador acessar
   
     */
@@ -105,18 +104,18 @@ Route::post('/refeicao/{id}/update',   [PlanoController::class, 'updateRefeicao'
     */
 
 
-Route::get('/nutricionista', 
-    [NutricionistaController::class, 'index']
-)->name('nutricionista.index');
+    Route::get(
+        '/nutricionista',
+        [NutricionistaController::class, 'index']
+    )->name('nutricionista.index');
 
 
-Route::get('/nutricionista/{id}/view', 
-    [NutricionistaController::class, 'view']
-)->name('nutricionista.view');
-
-
+    Route::get(
+        '/nutricionista/{id}/view',
+        [NutricionistaController::class, 'view']
+    )->name('nutricionista.view');
 });
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

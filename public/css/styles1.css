@@ -2,14 +2,12 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: white;
     margin: 0;
-    
 }
 
 .container {
     max-width: 800px;
     margin: auto;
     padding: 20px;
-
 }
 
 h2 {
@@ -44,27 +42,25 @@ h2 {
     font-size: 13px;
     margin-bottom: 15px;
 }
- /* ================= TABELA ================= */
 
-/* CONTAINER COM SCROLL */
+/* ================= TABELA ================= */
+
 .table-responsive {
     width: 100%;
-    overflow-x: auto; /* scroll quando necessário */
+    overflow-x: auto;
     border-radius: 12px;
     border: 1px solid #ddd;
     background-color: white;
 }
 
-/* TABELA */
 .table {
-    min-width: 1200px; /* força o scroll horizontal */
-    table-layout: auto;
+    width: 100%;
+    table-layout: fixed;
     background-color: white;
     margin-bottom: 0;
     border-collapse: collapse;
 }
 
-/* CABEÇALHO */
 .table thead th {
     background-color: #95b634;
     color: white;
@@ -72,20 +68,16 @@ h2 {
     vertical-align: middle;
 }
 
-/* CeLULAS */
 .table tbody td {
-    background-color: white; 
+    background-color: white;
     text-align: center;
     vertical-align: middle;
 }
 
-/* HOVER NAS LINHAS */
 .table tbody tr:hover td {
-    background-color: #fff1d6; /* cor ao passar o mouse */
+    background-color: #fff1d6;
     transition: background-color 0.2s ease;
 }
-
-/* ================= SCROLL ================= */
 
 .table-responsive::-webkit-scrollbar {
     height: 10px;
@@ -96,12 +88,12 @@ h2 {
 }
 
 .table-responsive::-webkit-scrollbar-thumb {
-    background: beige; /* mesma cor do tema */
+    background: beige;
     border-radius: 10px;
 }
 
 .table-responsive::-webkit-scrollbar-thumb:hover {
-    background: #95b634; /* verde um pouco mais escuro */
+    background: #95b634;
 }
 
 /* Refeições */
@@ -109,13 +101,10 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     background-color: beige;
     border-radius: 8px;
-
     padding: 12px;
     margin-bottom: 10px;
-
     border: 1px solid #eee;
 }
 
@@ -125,22 +114,44 @@ h2 {
     color: #666;
 }
 
-.acoes i{
+.acoes i {
     font-weight: bold;
-   
-       display: inline-block;
-    align-items: center;
-  color: #95b634;
+    display: inline-block;
+    color: #95b634;
+    margin: 0 6px;
+}
 
-margin: 4%;
+strong {
+    color: #95b634;
 }
-strong{
-color: #95b634;
-}
+
 #mainNav .nav-link {
     color: #95b634 !important;
 }
 
 #mainNav .nav-link:hover {
-    color: #7da12b !important; /* opcional */
+    color: #7da12b !important;
+}
+
+/* ================= TABELA DE USUÁRIOS ================= */
+
+.tabela-usuarios.table {
+    width: auto !important;
+    max-width: 100%;
+    min-width: 0 !important;
+    table-layout: auto !important;
+    margin: 0 auto;
+}
+
+.tabela-usuarios th,
+.tabela-usuarios td {
+    padding: 10px 20px;
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.tabela-usuarios th:last-child,
+.tabela-usuarios td:last-child {
+    text-align: center;
 }
