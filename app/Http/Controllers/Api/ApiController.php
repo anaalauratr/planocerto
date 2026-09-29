@@ -41,38 +41,38 @@ class ApiController extends Controller
     //-----------------------------------------------------------------
 
 
-  public function planoAlimentar(Request $request) //listar o plano alimentar juntamente com as refeicoes desse cliente logado no movel
-{
-    $user = $request->user();
+    public function planoAlimentar(Request $request) //listar o plano alimentar juntamente com as refeicoes desse cliente logado no movel
+    {
+        $user = $request->user();
 
-    // Verifica se é cliente
-    if ($user->tipo_usuario !== 'Cliente') {
+        // Verifica se é cliente
+        if ($user->tipo_usuario !== 'Cliente') {
+            return response()->json([
+                'message' => 'O usuário logado não é um cliente.'
+            ], 403);
+        }
+
+        // Busca o cliente e o plano com as refeições
+        $cliente = Cliente::where('users_id', $user->id)
+            ->with('planoAlimentar.refeicoes')
+            ->first();
+
+        // Verifica se encontrou o cliente
+        if (!$cliente) {
+            return response()->json([
+                'message' => 'Cadastro de cliente não encontrado.'
+            ], 404);
+        }
+
+        // Verifica se o cliente possui plano
+        if (!$cliente->planoAlimentar) {
+            return response()->json([
+                'message' => 'O cliente não possui um plano alimentar.'
+            ], 404);
+        }
+
         return response()->json([
-            'message' => 'O usuário logado não é um cliente.'
-        ], 403);
+            'plano' => $cliente->planoAlimentar
+        ], 200);
     }
-
-    // Busca o cliente e o plano com as refeições
-    $cliente = Cliente::where('users_id', $user->id)
-        ->with('planoAlimentar.refeicoes')
-        ->first();
-
-    // Verifica se encontrou o cliente
-    if (!$cliente) {
-        return response()->json([
-            'message' => 'Cadastro de cliente não encontrado.'
-        ], 404);
-    }
-
-    // Verifica se o cliente possui plano
-    if (!$cliente->planoAlimentar) {
-        return response()->json([
-            'message' => 'O cliente não possui um plano alimentar.'
-        ], 404);
-    }
-
-    return response()->json([
-        'plano' => $cliente->planoAlimentar
-    ], 200);
-}  
 }

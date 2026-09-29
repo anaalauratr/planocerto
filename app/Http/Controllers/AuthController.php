@@ -8,22 +8,38 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-public function login(Request $request) {
+    public function login(Request $request)
+    {
         $dados = $request->validate([
-            'email'    => 'required|email',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
-    
+
         $user = User::where('email', $dados['email'])->first();
-        if (! $user || ! Hash::check($dados['password'], $user->password)) {
-            return response()->json(['message' => 'Credenciais inválidas'], 401);
+
+        if (!$user || !Hash::check($dados['password'], $user->password)) {
+            return response()->json([
+                'message' => 'E-mail ou senha inválidos.'
+            ], 401);
         }
-    
+
+        // Verifica se é um usuário Cliente
+        if ($user->tipo_usuario !== 'Cliente') {
+            return response()->json([
+                'message' => 'Você precisa ser um cliente cadastrado para acessar o aplicativo.'
+            ], 403);
+        }
+
         $token = $user->createToken('app-flutter')->plainTextToken;
-        return response()->json(['token' => $token, 'user' => $user]);
+
+        return response()->json([
+            'token' => $token,
+            'user' => $user
+        ]);
     }
 
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $dados = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
@@ -44,9 +60,10 @@ public function login(Request $request) {
         ], 201);
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         $request->user()->currentAccessToken()->delete();    // invalida o token
-    
+
         return response()->json([
             'message' => 'Logout realizado com sucesso.'
         ], 200);
@@ -57,11 +74,9 @@ public function login(Request $request) {
         return response()->json($request->user());
     }
 
-    public function usuarios() {
+    public function usuarios()
+    {
         $usuarios = User::all();
         return response()->json($usuarios);
     }
-
-
-
 }

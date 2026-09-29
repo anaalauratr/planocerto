@@ -81,7 +81,7 @@
             class="form-control @error('password_confirmation') is-invalid @enderror"
             id="password_confirmation"
             name="password_confirmation"
-            placeholder="Confirme a Senha"
+            placeholder="Confirme a senha"
             autocomplete="new-password"
             required>
 
@@ -89,12 +89,12 @@
             @error('password_confirmation') {{ $message }} @enderror
         </div>
     </div>
-
-    <button type="submit" class="btn btn-login px-4">
-        CADASTRAR
-    </button>
-    <a class="btn btn-login px-4" href="{{ route('login') }}">VOLTAR</a>
-
+    <div class="text-end">
+        <button type="submit" class="btn btn-login px-4">
+            CADASTRAR
+        </button>
+        <a class="btn btn-login px-4" href="{{ route('login') }}">VOLTAR</a>
+    </div>
     </div>
 
 </form>

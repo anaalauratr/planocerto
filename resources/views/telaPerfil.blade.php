@@ -3,23 +3,28 @@
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('css/styles1.css') }}">
-<div class="container" style="margin-top: 7%">
-    <div style="display: flex; align-items: center; gap: 8px; margin-left: 1%">
-        <i class="bi bi-person-circle" style="font-size: 25px; color: #95b634"></i>
-        <h4 class="nome-plano" style="color: #95b634;">{{ auth()->user()->name }}</h4>
+
+<div class="container" style="margin-top: 6%; max-width: 640px;">
+
+    <div class="profile-card">
+
+        <div class="profile-avatar">
+            <i class="bi bi-person-fill"></i>
+        </div>
+
+        <h4 class="profile-name">{{ auth()->user()->name }}</h4>
+
+        <div class="profile-email">
+            <i class="fa fa-envelope"></i>
+            <span>{{ auth()->user()->email }}</span>
+        </div>
+
+        <a class="profile-edit-btn" href="{{ route('nutricionista.view', auth()->user()->id) }}">
+            <i class="bi bi-pencil"></i> Editar perfil
+        </a>
+
     </div>
 
-    <div class="plano">
-
-        <p> <span class="input-group-text icon-box" style="background-color: beige; color: #95b634">
-                <i class="fa fa-envelope"> </i>{{ auth()->user()->email }}
-            </span></p>
-
-
-        <a class="btn btn-success btn" href="{{ route('nutricionista.view',auth()->user()->id ) }}" style=" align-items: center;"> <i class="bi bi-pencil"></i></a>
-
-
-
-    </div>
 </div>
+
 @endsection

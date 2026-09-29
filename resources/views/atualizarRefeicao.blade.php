@@ -141,7 +141,7 @@
     <!-- Botao salvar -->
     <div class="text-end">
         <button type="submit" class="btn btn-login px-4">
-            Atualizar refeição
+            Salvar refeição
         </button>
         <a class="btn btn-login px-4" href="{{ route('Principal') }}">Cancelar</a>
     </div>

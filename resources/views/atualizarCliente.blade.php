@@ -3,10 +3,10 @@
 @section('content')
 
 <form action="{{ route('cliente.update', $cliente->id) }}"
-      method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+    method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
 
     @csrf
-    
+
 
     <h4 class="mb-4">Atualizar dados de clientes</h4>
 
@@ -23,8 +23,7 @@
             name="name"
             placeholder="Digite o nome"
             value="{{ old('name', $cliente->user->name) }}"
-            required
-        >
+            required>
 
         <div class="invalid-feedback">
             @error('name') {{ $message }} @enderror
@@ -44,8 +43,7 @@
             name="email"
             placeholder="Digite o email"
             value="{{ old('email', $cliente->user->email) }}"
-            required
-        >
+            required>
 
         <div class="invalid-feedback">
             @error('email') {{ $message }} @enderror
@@ -65,8 +63,7 @@
             name="objetivo"
             placeholder="Digite o objetivo"
             value="{{ old('objetivo', $cliente->objetivo) }}"
-            required
-        >
+            required>
 
         <div class="invalid-feedback">
             @error('objetivo') {{ $message }} @enderror
@@ -80,14 +77,14 @@
         </span>
 
         <input
-            type="text"
+            type="number"
+            step="0.01"
             class="form-control @error('peso') is-invalid @enderror"
             id="peso"
             name="peso"
             placeholder="Digite o peso"
             value="{{ old('peso', $cliente->peso) }}"
-            required
-        >
+            required>
 
         <div class="invalid-feedback">
             @error('peso') {{ $message }} @enderror
@@ -101,19 +98,20 @@
         </span>
 
         <input
-            type="text"
+            type="number"
+            step="0.01"
             class="form-control @error('altura') is-invalid @enderror"
             id="altura"
             name="altura"
             placeholder="Digite a altura"
             value="{{ old('altura', $cliente->altura) }}"
-            required
-        >
+            required>
 
         <div class="invalid-feedback">
             @error('altura') {{ $message }} @enderror
         </div>
     </div>
+
 
     <!-- data de nascimento -->
     <div class="col-md-6 mb-3">
@@ -132,8 +130,7 @@
                 id="data_nascimento"
                 name="data_nascimento"
                 value="{{ old('data_nascimento', optional($cliente->data_nascimento)->format('Y-m-d') ?? $cliente->data_nascimento) }}"
-                required
-            >
+                required>
 
             <div class="invalid-feedback">
                 @error('data_nascimento') {{ $message }} @enderror
@@ -153,8 +150,7 @@
                     type="radio"
                     name="sexo"
                     value="Masculino"
-                    {{ old('sexo', $cliente->sexo) == 'Masculino' ? 'checked' : '' }}
-                >
+                    {{ old('sexo', $cliente->sexo) == 'Masculino' ? 'checked' : '' }}>
                 <label class="form-check-label">Masculino</label>
             </div>
 
@@ -164,28 +160,27 @@
                     type="radio"
                     name="sexo"
                     value="Feminino"
-                    {{ old('sexo', $cliente->sexo) == 'Feminino' ? 'checked' : '' }}
-                >
+                    {{ old('sexo', $cliente->sexo) == 'Feminino' ? 'checked' : '' }}>
                 <label class="form-check-label">Feminino</label>
             </div>
         </div>
 
         @error('sexo')
-            <div class="text-danger small mt-1">{{ $message }}</div>
+        <div class="text-danger small mt-1">{{ $message }}</div>
         @enderror
     </div>
 
     <!-- plano alimentar -->
     <div class="mb-3">
-         <label class="form-label">Plano alimentar desse cliente</label>
+        <label class="form-label">Plano alimentar desse cliente</label>
         <select name="plano_id" class="form-select @error('plano_id') is-invalid @enderror" required>
             <option value="">Selecione um plano</option>
 
             @foreach($planos as $plano)
-                <option value="{{ $plano->id }}"
-                    {{ old('plano_id', $cliente->plano_alimentar_id) == $plano->id ? 'selected' : '' }}>
-                    {{ $plano->nome }}
-                </option>
+            <option value="{{ $plano->id }}"
+                {{ old('plano_id', $cliente->plano_alimentar_id) == $plano->id ? 'selected' : '' }}>
+                {{ $plano->nome }}
+            </option>
             @endforeach
         </select>
 

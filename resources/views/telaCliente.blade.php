@@ -16,8 +16,10 @@
             </button>
     </form>
 </div>
-
-<a class="btn btn-success btn" href="{{ route('cliente.create') }}">NOVO <i class="bi bi-plus-circle"></i></a>
+<br>
+<div class="text-end">
+    <a class="btn btn-success btn" href="{{ route('cliente.create') }}">NOVO <i class="bi bi-plus-circle"></i></a>
+</div>
 <!-- Div do plano alimentar -->
 <div class="plano">
 
@@ -27,7 +29,7 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Data de Nascimento</th>
+                    <th>Data de nascimento</th>
                     <th>Objetivo</th>
 
                     <th>Ações</th>
@@ -36,37 +38,25 @@
 
             <tbody>
 
+                @foreach ($clientes as $cliente)
                 <tr>
-                    @foreach ($clientes as $cliente)
-                <tr>
-
 
                     <td>{{ $cliente->user->name }}</td>
                     <td>{{ $cliente->data_nascimento->format('d/m/Y') }}</td>
                     <td>{{ $cliente->objetivo }}</td>
 
-
                     <td class="acoes">
-
                         <a href="{{ route('cliente.view', $cliente->id) }}">
-                            <i class="bi bi-eye"></i>
+                            <i class="bi bi-eye-fill"></i>
                         </a>
 
                         <a href="{{ route('cliente.destroy', encrypt($cliente->id)) }}">
-                            <i class="bi bi-trash btn-excluir"></i>
+                            <i class="bi bi-trash-fill btn-excluir"></i>
                         </a>
-
                     </td>
-
-
 
                 </tr>
                 @endforeach
-
-
-
-
-
 
             </tbody>
 

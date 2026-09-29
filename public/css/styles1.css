@@ -55,15 +55,23 @@ h2 {
 
 .table {
     width: 100%;
-    table-layout: fixed;
+    min-width: 600px;
+    /* ← NOVO: garante espaço mínimo pras colunas não espremerem */
     background-color: white;
     margin-bottom: 0;
     border-collapse: collapse;
+    /* table-layout: fixed;  ← REMOVIDO, era o que causava o problema */
+}
+
+.table thead th,
+.table tbody td {
+    white-space: nowrap;
+    /* ← NOVO: impede quebra de linha dentro da célula */
 }
 
 .table thead th {
-    background-color: #95b634;
-    color: white;
+    background-color: rgba(149, 182, 52, 0.15);
+    color: #95b634;
     text-align: center;
     vertical-align: middle;
 }
@@ -75,7 +83,7 @@ h2 {
 }
 
 .table tbody tr:hover td {
-    background-color: #fff1d6;
+    background-color: rgba(149, 182, 52, 0.15);
     transition: background-color 0.2s ease;
 }
 
@@ -101,7 +109,8 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: beige;
+    background-color: rgba(149, 182, 52, 0.15);
+    /* era: beige */
     border-radius: 8px;
     padding: 12px;
     margin-bottom: 10px;
@@ -135,23 +144,133 @@ strong {
 
 /* ================= TABELA DE USUÁRIOS ================= */
 
+
+/* ================= TABELA DE USUÁRIOS ================= */
+
 .tabela-usuarios.table {
-    width: auto !important;
-    max-width: 100%;
+    width: 100% !important;
     min-width: 0 !important;
     table-layout: auto !important;
-    margin: 0 auto;
+    margin: 0;
 }
 
-.tabela-usuarios th,
-.tabela-usuarios td {
-    padding: 10px 20px;
+.table.tabela-usuarios thead th,
+.table.tabela-usuarios tbody td {
+    padding: 10px 12px;
     text-align: left;
     vertical-align: middle;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
-.tabela-usuarios th:last-child,
-.tabela-usuarios td:last-child {
+/* Títulos das colunas centralizados */
+.table.tabela-usuarios thead th {
     text-align: center;
+}
+
+.table.tabela-usuarios thead th:last-child,
+.table.tabela-usuarios tbody td:last-child {
+    text-align: center;
+    white-space: nowrap;
+    width: 1%;
+}
+
+@media (max-width: 768px) {
+    .tabela-usuarios.table {
+        width: auto !important;
+        min-width: 100% !important;
+    }
+
+    .table.tabela-usuarios thead th,
+    .table.tabela-usuarios tbody td {
+        white-space: nowrap;
+        overflow-wrap: normal;
+        padding: 10px 16px;
+    }
+}
+
+.profile-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 32px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(149, 182, 52, 0.15);
+}
+
+.profile-avatar {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: #95b634;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.profile-name {
+    color: #4a5c1e;
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.profile-email {
+    color: #7a8a4a;
+    font-size: 15px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.profile-edit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #95b634;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.profile-edit-btn:hover {
+    background: #7ea329;
+    color: #fff;
+}
+
+/* ================= ACCORDION PLANOS ================= */
+
+.accordion-item {
+
+
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.accordion-button {
+    background-color: rgba(149, 182, 52, 0.15);
+    color: #95b634;
+    font-weight: 600;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(149, 182, 52, 0.15);
+    color: #95b634;
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(149, 182, 52, 0.25);
+    border-color: #95b634;
+}
+
+.accordion-button::after {
+    filter: invert(56%) sepia(45%) saturate(485%) hue-rotate(38deg) brightness(95%) contrast(90%);
 }

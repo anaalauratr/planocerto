@@ -5,7 +5,7 @@
 
 
 <div class="container" style="margin-top: 7%">
-    <h2>Listagem de usuario</h2>
+    <h2>Listagem de usuários</h2>
     <form class="mb-3" method="GET" action="{{ route('usuario.search') }}">
 
 
@@ -14,81 +14,83 @@
             <button class="btn" type="submit" style="background-color:#95b634; color:#fff;">
                 <i class="bi bi-search"></i>
             </button>
+        </div>
     </form>
-</div>
 
-<!-- Div do plano alimentar -->
 
-<div class="plano">
-    <div class="table-responsive">
-        <table class="table table-bordered tabela-usuarios">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Tipo usuário</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
+    <!-- Div do plano alimentar -->
 
-            <tbody>
-                @foreach ($usuarios as $usuario)
-                <tr>
-                    <td>{{ $usuario->name }}</td>
-                    <td>{{ $usuario->email }}</td>
-                    <td>{{ $usuario->tipo_usuario }}</td>
+    <div class="plano">
+        <div class="table-responsive">
+            <table class="table table-bordered tabela-usuarios">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Tipo usuário</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
 
-                    <td class="acoes">
-                        <a href="{{ route('usuario.view', $usuario->id) }}">
-                            <i class="bi bi-eye"></i>
-                        </a>
+                <tbody>
+                    @foreach ($usuarios as $usuario)
+                    <tr>
+                        <td>{{ $usuario->name }}</td>
+                        <td>{{ $usuario->email }}</td>
+                        <td>{{ $usuario->tipo_usuario }}</td>
 
-                        <a href="{{ route('usuario.destroy', encrypt($usuario->id)) }}">
-                            <i class="bi bi-trash btn-excluir"></i>
-                        </a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        <td class="acoes">
+                            <a href="{{ route('usuario.view', $usuario->id) }}">
+                                <i class="bi bi-eye-fill"></i>
+                            </a>
+
+                            <a href="{{ route('usuario.destroy', encrypt($usuario->id)) }}">
+                                <i class="bi bi-trash-fill btn-excluir"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-
 @endsection
 @section('script')
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
 
-    var botoesExcluir = document.querySelectorAll('.btn-excluir');
+        var botoesExcluir = document.querySelectorAll('.btn-excluir');
 
-    botoesExcluir.forEach(function(botao) {
+        botoesExcluir.forEach(function(botao) {
 
-        botao.addEventListener('click', function(event) {
+            botao.addEventListener('click', function(event) {
 
-            var tipoUsuario = this.closest('tr') .querySelector('td:nth-child(3)') .textContent.trim();
+                var tipoUsuario = this.closest('tr').querySelector('td:nth-child(3)').textContent.trim();
 
-            var mensagem;
+                var mensagem;
 
-            if (tipoUsuario === 'Nutricionista') {
+                if (tipoUsuario === 'Nutricionista') {
 
-                mensagem = "ATENÇÃO!\n\n" +
-                    "Tem certeza que deseja excluir este nutricionista?\n\n" +
-                    "Ao excluir este usuário, todos os seus clientes e planos alimentares poderão ser perdidos.\n\n" +
-                    "Deseja realmente continuar?";
+                    mensagem = "ATENÇÃO!\n\n" +
+                        "Tem certeza que deseja excluir este nutricionista?\n\n" +
+                        "Ao excluir este usuário, todos os seus clientes e planos alimentares poderão ser perdidos.\n\n" +
+                        "Deseja realmente continuar?";
 
-            } else {
+                } else {
 
-                mensagem = "Tem certeza que deseja excluir esse cliente?";}
-            if (!confirm(mensagem)) {
-                event.preventDefault();
-            }
+                    mensagem = "Tem certeza que deseja excluir esse cliente?";
+                }
+                if (!confirm(mensagem)) {
+                    event.preventDefault();
+                }
+
+            });
 
         });
 
     });
-
-});
 </script>
 
 @endsection

@@ -8,7 +8,7 @@
     @csrf
 
 
-    <h4 class="mb-4">Atualizar dados de usuarios</h4>
+    <h4 class="mb-4">Atualizar dados de usuário</h4>
 
     <!-- nome -->
     <div class="input-group mb-3">

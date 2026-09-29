@@ -7,7 +7,7 @@
 
     @csrf
 
-    <h4 class="mb-4">Atualizar Plano Alimentar</h4>
+    <h4 class="mb-4">Atualizar plano alimentar</h4>
 
     <!-- Nome do plano -->
     <div class="input-group mb-3">
@@ -115,7 +115,7 @@
     <!-- Botao salvar -->
     <div class="text-end">
         <button type="submit" class="btn btn-login px-4">
-            Salvar Plano
+            Salvar plano
         </button>
         <a class="btn btn-login px-4" href="{{ route('Principal') }}">Cancelar</a>
     </div>

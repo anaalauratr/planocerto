@@ -7,7 +7,7 @@
 
     @csrf
 
-    <h4 class="mb-4">Cadastro de Plano Alimentar</h4>
+    <h4 class="mb-4">Cadastro de plano alimentar</h4>
 
     <!-- Nome do plano -->
     <div class="input-group mb-3">
@@ -31,7 +31,7 @@
 
     </div>
 
-    <!-- descricao -->
+    <!-- Descrição -->
     <div class="input-group mb-3">
 
         <span class="input-group-text icon-box">
@@ -57,9 +57,11 @@
     <div class="row">
 
         <div class="col-md-6 mb-3">
+
             <label class="form-label" for="data_inicio">
                 Data de início
             </label>
+
             <div class="input-group">
 
                 <span class="input-group-text icon-box">
@@ -83,9 +85,11 @@
         </div>
 
         <div class="col-md-6 mb-3">
+
             <label class="form-label" for="data_fim">
                 Data de fim
             </label>
+
             <div class="input-group">
 
                 <span class="input-group-text icon-box">
@@ -110,97 +114,122 @@
 
     </div>
 
-    <!-- ------------------------------------  -->
+
+    <!-- Refeições -->
 
     <h5 class="mt-4">Refeições</h5>
+
     <div id="lista-refeicoes">
 
-        <!-- Refeição  -->
-        <div class="refeicao-item mb-4" style="border: 1px solid #95b634; border-radius: 8px; padding: 2%">
+        <!-- Refeição inicial -->
+        <div class="refeicao-item mb-4"
+            style="border: 1px solid #95b634; border-radius: 8px; padding: 2%">
 
-            <!-- Linha 1 -->
-            <div class="row mb-2">
+            <!-- Nome -->
+            <div class="input-group mb-3">
 
-                <!-- Nome -->
-                <div class="col-md-4">
+                <span class="input-group-text icon-box">
+                    <i class="fa fa-utensils"></i>
+                </span>
 
-                    <input
-                        type="text"
-                        class="form-control @error('refeicoes.0.nome') is-invalid @enderror"
-                        placeholder="Nome"
-                        name="refeicoes[0][nome]"
-                        value="{{ old('refeicoes.0.nome') }}"
-                        required>
+                <input
+                    type="text"
+                    class="form-control @error('refeicoes.0.nome') is-invalid @enderror"
+                    placeholder="Nome da refeição"
+                    name="refeicoes[0][nome]"
+                    value="{{ old('refeicoes.0.nome') }}"
+                    required>
 
-                    <div class="invalid-feedback">
-                        @error('refeicoes.0.nome') {{ $message }} @enderror
-                    </div>
-
+                <div class="invalid-feedback">
+                    @error('refeicoes.0.nome') {{ $message }} @enderror
                 </div>
 
             </div>
 
-            <!-- Linha 2 (Descrição alinhada) -->
-            <div class="row mb-2">
 
-                <div class="col-md-12">
+            <!-- Descrição -->
+            <div class="input-group mb-3">
 
-                    <textarea
-                        class="form-control @error('refeicoes.0.descricao') is-invalid @enderror"
-                        placeholder="Descrição da refeição"
-                        name="refeicoes[0][descricao]"
-                        rows="3"
-                        required>{{ old('refeicoes.0.descricao') }}</textarea>
+                <span class="input-group-text icon-box">
+                    <i class="fa fa-align-left"></i>
+                </span>
 
-                    <div class="invalid-feedback">
-                        @error('refeicoes.0.descricao') {{ $message }} @enderror
-                    </div>
+                <textarea
+                    class="form-control @error('refeicoes.0.descricao') is-invalid @enderror"
+                    placeholder="Descrição da refeição"
+                    name="refeicoes[0][descricao]"
+                    rows="3"
+                    required>{{ old('refeicoes.0.descricao') }}</textarea>
 
+                <div class="invalid-feedback">
+                    @error('refeicoes.0.descricao') {{ $message }} @enderror
                 </div>
 
             </div>
 
-            <!-- Linha 3 -->
+
+            <!-- Calorias e horário -->
             <div class="row">
 
-                <div class="col-md-4">
+                <div class="col-md-5">
 
-                    <input
-                        type="number"
-                        class="form-control @error('refeicoes.0.calorias') is-invalid @enderror"
-                        placeholder="Calorias"
-                        name="refeicoes[0][calorias]"
-                        value="{{ old('refeicoes.0.calorias') }}"
-                        required>
+                    <div class="input-group mb-3">
 
-                    <div class="invalid-feedback">
-                        @error('refeicoes.0.calorias') {{ $message }} @enderror
+                        <span class="input-group-text icon-box">
+                            <i class="fa fa-fire"></i>
+                        </span>
+
+                        <input
+                            type="number"
+                            class="form-control @error('refeicoes.0.calorias') is-invalid @enderror"
+                            placeholder="Calorias"
+                            name="refeicoes[0][calorias]"
+                            value="{{ old('refeicoes.0.calorias') }}"
+                            required>
+
+                        <div class="invalid-feedback">
+                            @error('refeicoes.0.calorias') {{ $message }} @enderror
+                        </div>
+
                     </div>
 
                 </div>
 
-                <div class="col-md-4">
 
-                    <input
-                        type="time"
-                        class="form-control @error('refeicoes.0.horario') is-invalid @enderror"
-                        name="refeicoes[0][horario]"
-                        value="{{ old('refeicoes.0.horario') }}"
-                        required>
+                <div class="col-md-5">
 
-                    <div class="invalid-feedback">
-                        @error('refeicoes.0.horario') {{ $message }} @enderror
+                    <div class="input-group mb-3">
+
+                        <span class="input-group-text icon-box">
+                            <i class="fa fa-clock"></i>
+                        </span>
+
+                        <input
+                            type="time"
+                            class="form-control @error('refeicoes.0.horario') is-invalid @enderror"
+                            name="refeicoes[0][horario]"
+                            value="{{ old('refeicoes.0.horario') }}"
+                            required>
+
+                        <div class="invalid-feedback">
+                            @error('refeicoes.0.horario') {{ $message }} @enderror
+                        </div>
+
                     </div>
 
                 </div>
 
-                <div class="col-md-4">
+
+                <!-- Botão remover -->
+                <div class="col-md-2">
 
                     <button
                         type="button"
                         class="btn btn-danger"
                         onclick="removerRefeicao(this)">
+
                         <i class="bi bi-trash3"></i>
+
                     </button>
 
                 </div>
@@ -211,6 +240,7 @@
 
     </div>
 
+
     <!-- Botão adicionar -->
     <div class="text-center mb-3">
 
@@ -218,18 +248,28 @@
             type="button"
             class="btn btn-login"
             onclick="adicionarRefeicao()">
+
             + Adicionar Refeição
+
         </button>
 
     </div>
 
-    <!-- Botao salvar -->
+
+    <!-- Botão salvar -->
     <div class="text-end">
+
         <button type="submit" class="btn btn-login px-4">
-            CADASTRAR
+            Cadastrar
         </button>
-        <a class="btn btn-login px-4" href="{{ route('Principal') }}">VOLTAR</a>
+
+        <a class="btn btn-login px-4"
+            href="{{ route('Principal') }}">
+            Cancelar
+        </a>
+
     </div>
+
 
 </form>
 
@@ -241,73 +281,101 @@
     function adicionarRefeicao() {
 
         let container = document.getElementById("lista-refeicoes");
+
         let nova = document.createElement("div");
+
         nova.className = "refeicao-item mb-4";
+
         nova.style = "border: 1px solid #95b634; border-radius: 8px; padding: 2%";
+
         nova.innerHTML = `
-        <div class="row mb-2">
 
             <!-- Nome -->
-            <div class="col-md-4">
+            <div class="input-group mb-3">
+
+                <span class="input-group-text icon-box">
+                    <i class="fa fa-utensils"></i>
+                </span>
 
                 <input
                     type="text"
                     class="form-control"
-                    placeholder="Nome"
+                    placeholder="Nome da refeição"
                     name="refeicoes[${contador}][nome]"
                     required>
 
             </div>
 
-        </div>
 
-        <!-- Linha 2 -->
-        <div class="row mb-2">
-            <div class="col-md-12">
+            <!-- Descrição -->
+            <div class="input-group mb-3">
+
+                <span class="input-group-text icon-box">
+                    <i class="fa fa-align-left"></i>
+                </span>
 
                 <textarea
                     class="form-control"
                     placeholder="Descrição da refeição"
                     name="refeicoes[${contador}][descricao]"
                     rows="3"
-                    required
-                ></textarea>
+                    required></textarea>
 
-            </div>
 
         </div>
 
-        <!-- Linha 3 -->
+
+        <!-- Calorias e horário -->
         <div class="row">
 
-            <div class="col-md-4">
-                <input
-                    type="number"
-                    class="form-control"
-                    placeholder="Calorias"
-                    name="refeicoes[${contador}][calorias]"
-                    required
-                >
+            <div class="col-md-5">
+
+                <div class="input-group mb-3">
+
+                    <span class="input-group-text icon-box">
+                        <i class="fa fa-fire"></i>
+                    </span>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Calorias"
+                        name="refeicoes[${contador}][calorias]"
+                        required>
+
+                </div>
 
             </div>
 
-            <div class="col-md-4">
-                <input
-                    type="time"
-                    class="form-control"
-                    name="refeicoes[${contador}][horario]"
-                    required
-                >
+
+            <div class="col-md-5">
+
+                <div class="input-group mb-3">
+
+                    <span class="input-group-text icon-box">
+                        <i class="fa fa-clock"></i>
+                    </span>
+
+                    <input
+                        type="time"
+                        class="form-control"
+                        name="refeicoes[${contador}][horario]"
+                        required>
+
+                </div>
 
             </div>
 
-            <div class="col-md-4">
+
+            <div class="col-md-2">
+
                 <button
                     type="button"
                     class="btn btn-danger"
-                    onclick="removerRefeicao(this)"
-                >
+                    onclick="removerRefeicao(this)">
+
                     <i class="bi bi-trash3"></i>
+
                 </button>
 
             </div>
@@ -322,22 +390,37 @@
 
     }
 
+
     function removerRefeicao(botao) {
+
         botao.closest(".refeicao-item").remove();
+
     }
 
-    // Validação Bootstrap (needs-validation)
+
+    // Validação Bootstrap
     (() => {
+
         'use strict'
+
         const forms = document.querySelectorAll('.needs-validation')
+
         Array.from(forms).forEach(form => {
+
             form.addEventListener('submit', event => {
+
                 if (!form.checkValidity()) {
+
                     event.preventDefault()
                     event.stopPropagation()
+
                 }
+
                 form.classList.add('was-validated')
+
             }, false)
+
         })
+
     })()
 </script>

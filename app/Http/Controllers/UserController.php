@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
 
-           //esse id é do administrador
+        //esse id é do administrador
         $usuarios = User::where('id', '!=', 71)->get();
 
         return view('telaUsuarios', [

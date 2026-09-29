@@ -18,10 +18,11 @@
     </form>
 </div>
 <br>
-<a class="btn btn-success" href="{{ route('plano.create') }}">
-    NOVO <i class="bi bi-plus-circle"></i>
-</a>
-
+<div class="text-end">
+    <a class="btn btn-success" href="{{ route('plano.create') }}">
+        NOVO <i class="bi bi-plus-circle"></i>
+    </a>
+</div>
 
 <div class="accordion mt-4" id="accordionPlanos">
 
