@@ -6,6 +6,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\NutricionistaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AppLoginController;
 use App\Http\Controllers\Auth\PasswordController;
 
 /*| Página inicial*/
@@ -30,19 +31,22 @@ Route::get(
     [NutricionistaController::class, 'create']
 )->name('nutricionista.create');
 
-
+Route::get('/login-app', [AppLoginController::class, 'entrar']);
 
 /*
 | Rotas protegidas
 */
 
 Route::middleware('auth')->group(function () {
+    Route::get('/app/alterar-senha', function () {
+    return view('alterar-senha');
+})->name('app.senha');
 
 
     /*
     | Perfil
     */
-
+      
     Route::get('/perfil', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');

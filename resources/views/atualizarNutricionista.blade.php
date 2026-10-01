@@ -155,7 +155,7 @@
 
     <div class="text-end">
         <button type="submit" class="btn btn-login px-4">
-            Salvar
+            Salvar 
         </button>
         <a class="btn btn-login px-4" href="{{ route('nutricionista.index') }}">Voltar</a>
     </div>
