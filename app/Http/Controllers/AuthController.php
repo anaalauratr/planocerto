@@ -38,27 +38,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request)
-    {
-        $dados = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
-        ]);
-
-        $user = User::create([
-            'name' => $dados['name'],
-            'email' => $dados['email'],
-            'password' => Hash::make($dados['password']),
-        ]);
-
-        $token = $user->createToken('teste-api')->plainTextToken;
-
-        return response()->json([
-            'user' => $user,
-            'token' => $token,
-        ], 201);
-    }
+    
 
     public function logout(Request $request)
     {

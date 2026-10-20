@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\PlanoAlimentar;
 use App\Models\Refeicao;
 use App\Models\User;
-
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class PlanoController extends Controller
@@ -15,9 +15,7 @@ class PlanoController extends Controller
     {
         $planos = PlanoAlimentar::where('users_id_nutricionista', Auth::id())->with('refeicoes')->get();
 
-        return view('telaPlanoAlimentar', [
-            'planos' => $planos
-        ]);
+        return view('telaPlanoAlimentar', ['planos' => $planos]);
     }
 
 
@@ -25,9 +23,6 @@ class PlanoController extends Controller
     {
         return view('cadastroPlano');
     }
-
-
-
 
 
     public function store(Request $request)
@@ -101,7 +96,7 @@ class PlanoController extends Controller
 
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) //atualizando dados do plano
     {
         // Confere se os dados estão corretos
         $request->validate([
@@ -146,7 +141,7 @@ class PlanoController extends Controller
             return redirect()->route('Principal');
         }
     }
-    public function updateRefeicao(Request $request, $id)
+    public function updateRefeicao(Request $request, $id) //atualizo informacoes somente da refeicao selecionada
     {
         // Confere se os dados estão corretos
         $request->validate([
@@ -162,8 +157,6 @@ class PlanoController extends Controller
             $refeicao = Refeicao::find($id);
 
             // Troca os dados antigos pelos novos
-
-
 
             $refeicao->nome = $request->nome;
             $refeicao->descricao = $request->descricao;
@@ -188,15 +181,29 @@ class PlanoController extends Controller
     {
         try {
             // Descobre qual plano deve ser apagado
-            $plano = PlanoAlimentar::find(decrypt($id));
+            $plano = PlanoAlimentar::findOrFail(decrypt($id));
 
-            // Remove o registro
+            // Busca os clientes que utilizam esse plano
+            $clientes = Cliente::where('plano_alimentar_id', $plano->id)->get();
+
+            foreach ($clientes as $cliente) {
+                // Exclui o usuário relacionado ao cliente
+                $usuario = User::find($cliente->users_id);
+
+                if ($usuario) {
+                    $usuario->delete();
+                }
+
+                // Exclui o cadastro do cliente
+                $cliente->delete();
+            }
+
+            // Exclui as refeições do plano
             $plano->refeicoes()->delete();
 
+            // Exclui o plano alimentar
             $plano->delete();
 
-
-            // Mostra mensagem de sucesso e volta pra lista
             session()->flash('msg', 'Registro excluído com sucesso!');
             return redirect()->route('Principal');
         } catch (\Exception $e) {
@@ -208,11 +215,10 @@ class PlanoController extends Controller
     public function destroyRefeicao($id)
     {
         try {
-            // Descobre qual refeicai deve ser apagada
+            // Descobre qual refeicao deve ser apagada
             $refeicao = Refeicao::find(decrypt($id));
 
             // Remove o registro
-
 
             $refeicao->delete();
 
@@ -233,25 +239,23 @@ class PlanoController extends Controller
 
     public function search(Request $request)
     {
-        // Pega o texto digitado na busca
+        // Pega o texto digitado na busca, converte os valores para string e remove os espaços em branco do início e do final
         $filtro = trim((string) $request->input('filtro', ''));
 
-        $planos = PlanoAlimentar::where('users_id_nutricionista', Auth::id())
-            ->where(function ($query) use ($filtro) {
+        $planos = PlanoAlimentar::where('users_id_nutricionista', Auth::id()) ///filtra os registros pela coluna users_id_nutricionista para obter id do nutricionista logado
+            ->where(function ($query) use ($filtro) { //pesquiso em diferentes campos do plano alimentar
                 $query->where('nome', 'like', "%{$filtro}%")
                     ->orWhere('descricao', 'like', "%{$filtro}%")
-                    ->orWhereRaw('DATE_FORMAT(data_inicio, "%d/%m/%Y") like ?', ["%{$filtro}%"])
+                    ->orWhereRaw('DATE_FORMAT(data_inicio, "%d/%m/%Y") like ?', ["%{$filtro}%"]) //formato a data para pessoa poder pesquisar no formato ex: 20/10/2024
                     ->orWhereRaw('DATE_FORMAT(data_fim, "%d/%m/%Y") like ?', ["%{$filtro}%"])
-                    ->orWhereHas('refeicoes', function ($sub) use ($filtro) {
+                    ->orWhereHas('refecoes', function ($sub) use ($filtro) { //verifica se existe reficoes relacionadas ao plano q atenda a alguma condicao a baixo:
                         $sub->where('nome', 'like', "%{$filtro}%")
                             ->orWhere('descricao', 'like', "%{$filtro}%")
-                            ->orWhereRaw('CAST(calorias AS CHAR) like ?', ["%{$filtro}%"])
+                            ->orWhereRaw('CAST(calorias AS CHAR) like ?', ["%{$filtro}%"]) //transforma valor numerico para textp para usar o like
                             ->orWhereRaw('DATE_FORMAT(horario, "%H:%i") like ?', ["%{$filtro}%"]);
                     });
-            })
-            ->with('refeicoes')
-            ->orderBy('id')
-            ->get();
+            })->with('refeicoes') //carrego as refeicoes dos planos encontrados
+            ->orderBy('id')->get(); //ordeno pelo id
 
         return view('telaPlanoAlimentar', [
             'planos' => $planos,

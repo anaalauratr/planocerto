@@ -21,13 +21,12 @@
             placeholder="Email"
             value="{{ old('email') }}"
             required
-            autofocus
-        >
+            autofocus>
 
         @error('email')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
         @enderror
 
     </div>
@@ -45,13 +44,12 @@
             name="password"
             class="form-control @error('password') is-invalid @enderror"
             placeholder="Senha"
-            required
-        >
+            required>
 
         @error('password')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
         @enderror
 
     </div>
@@ -85,14 +83,10 @@
     </p>
 
 
-    <button
-        type="button"
-        class="btn btn-login px-4"
-        onclick="window.location.href='{{ route('nutricionista.create') }}'">
-
+    <a href="{{ route('nutricionista.create') }}"
+        class="btn btn-login px-4">
         CADASTRE-SE
-
-    </button>
+    </a>
 
 
 </div>

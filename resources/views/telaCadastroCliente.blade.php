@@ -144,7 +144,7 @@
     </div>
     <br>
     <div class="text-end">
-        <button type="submit" class="btn btn-login px-4 text-end"">Cadastrar</button>
+        <button type="submit" class="btn btn-login px-4 text-end">Cadastrar</button>
      <a class=" btn btn-login px-4"
             href="{{ route('cliente.index') }}">
             Cancelar

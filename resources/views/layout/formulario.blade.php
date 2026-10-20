@@ -53,13 +53,11 @@
             color: #95b634;
         }
 
-
         .social-btn {
             width: 40px;
             height: 40px;
             border-radius: 50%;
         }
-
 
         textarea {
             resize: vertical;
@@ -76,13 +74,23 @@
             background-color: #95b634;
             color: white;
         }
+
+        /* Botão do olhinho da senha */
+        .btn-olho {
+            background: #fff;
+            color: #95b634;
+            border: 1px solid #ced4da;
+        }
+
+        .btn-olho:hover {
+            background: #f1f5e3;
+            color: #95b634;
+        }
     </style>
 
 </head>
 
 <body>
-
-
 
     <div class="container">
 
@@ -99,6 +107,28 @@
         </div>
 
     </div>
+
+    <!-- Olhinho de mostrar/ocultar senha -->
+    <script>
+        document.querySelectorAll('input[type="password"]').forEach((input) => {
+            const botao = document.createElement('button');
+            botao.type = 'button';
+            botao.className = 'btn btn-olho';
+            botao.tabIndex = -1;
+            botao.setAttribute('aria-label', 'Mostrar senha');
+            botao.innerHTML = '<i class="fa fa-eye"></i>';
+
+            botao.addEventListener('click', () => {
+                const mostrando = input.type === 'text';
+                input.type = mostrando ? 'password' : 'text';
+                botao.firstElementChild.className = mostrando ? 'fa fa-eye' : 'fa fa-eye-slash';
+                botao.setAttribute('aria-label', mostrando ? 'Mostrar senha' : 'Ocultar senha');
+            });
+
+            // coloca o botão logo depois do input, dentro do input-group
+            input.after(botao);
+        });
+    </script>
 
 </body>
 

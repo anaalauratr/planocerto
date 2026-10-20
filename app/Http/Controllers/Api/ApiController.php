@@ -20,9 +20,7 @@ class ApiController extends Controller
         }
 
         // Procura o cliente pelo user logado
-        $cliente = Cliente::where('users_id', $user->id)
-            ->with('user')
-            ->first();
+        $cliente = Cliente::where('users_id', $user->id)->with('user')->first();
 
         // Se não encontrar
         if (!$cliente) {
@@ -53,9 +51,7 @@ class ApiController extends Controller
         }
 
         // Busca o cliente e o plano com as refeições
-        $cliente = Cliente::where('users_id', $user->id)
-            ->with('planoAlimentar.refeicoes')
-            ->first();
+        $cliente = Cliente::where('users_id', $user->id)->with('planoAlimentar.refeicoes')->first();
 
         // Verifica se encontrou o cliente
         if (!$cliente) {

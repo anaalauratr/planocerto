@@ -38,15 +38,17 @@ Route::get('/login-app', [AppLoginController::class, 'entrar']);
 */
 
 Route::middleware('auth')->group(function () {
+
+    //  Essa rota é para ser acessada no aplicativo, onde a pessoa tem um inAppView q ela ve a tela de alterar senha do web no celular
     Route::get('/app/alterar-senha', function () {
-    return view('alterar-senha');
-})->name('app.senha');
+        return view('alterar-senha');
+    })->name('app.senha');
 
 
     /*
     | Perfil
     */
-      
+
     Route::get('/perfil', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
@@ -69,8 +71,7 @@ Route::middleware('auth')->group(function () {
         ->name('plano.view');
     Route::post('/plano/{id}/update',   [PlanoController::class, 'update'])->name('plano.update');
 
-    Route::get('/plano/{id}/refeicao', [PlanoController::class, 'viewRefeicao'])
-        ->name('plano.refeicao.view');
+    Route::get('/plano/{id}/refeicao', [PlanoController::class, 'viewRefeicao'])->name('plano.refeicao.view');
     Route::post('/refeicao/{id}/update',   [PlanoController::class, 'updateRefeicao'])->name('refeicao.update');
     Route::get('/plano/{id}/destroy',   [PlanoController::class, 'destroy'])->name('plano.destroy');
     Route::get('/refeicao/{id}/destroy',   [PlanoController::class, 'destroyRefeicao'])->name('refeicao.destroy');
@@ -108,17 +109,10 @@ Route::middleware('auth')->group(function () {
     */
 
 
-    Route::get(
-        '/nutricionista',
-        [NutricionistaController::class, 'index']
-    )->name('nutricionista.index');
+    Route::get('/nutricionista',[NutricionistaController::class, 'index'])->name('nutricionista.index');
 
 
-    Route::get(
-        '/nutricionista/{id}/view',
-        [NutricionistaController::class, 'view']
-    )->name('nutricionista.view');
-});
+    Route::get('/nutricionista/{id}/view',[NutricionistaController::class, 'view'])->name('nutricionista.view');});
 
 
 

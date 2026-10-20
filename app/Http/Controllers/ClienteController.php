@@ -23,7 +23,7 @@ class ClienteController extends Controller
         ]);
     }
     public function create()
-    {
+    {   //listo planos do nutricionista logado
         $planos = PlanoAlimentar::where('users_id_nutricionista', Auth::id())->get();
 
         return view('telaCadastroCliente', [
@@ -137,30 +137,34 @@ class ClienteController extends Controller
         }
     }
 
+
     public function destroy($id)
     {
         try {
-            // Descobre qual cliente deve ser apagado
-            $cliente = Cliente::find(decrypt($id));
+            // Encontra o cliente pelo ID descriptografado
+            $cliente = Cliente::findOrFail(decrypt($id));
 
-            // Remove o registro do cliente (soft delete)
+            // Encontra o usuário relacionado ao cliente
+            $usuario = User::findOrFail($cliente->users_id);
+
+            // Exclui o cliente e o usuário
             $cliente->delete();
+            $usuario->delete();
 
-            // Mostra mensagem de sucesso e volta pra lista
-            session()->flash('msg', 'Registro excluído com sucesso!');
+            // Mostra mensagem de sucesso e volta para a lista
+            session()->flash('msg', 'Cliente excluído com sucesso!');
             return redirect()->route('cliente.index');
         } catch (\Exception $e) {
             session()->flash('erro', 'Erro ao excluir: ' . $e->getMessage());
             return redirect()->route('cliente.index');
         }
     }
-
     public function search(Request $request)
     {
         $filtro = $request->input('filtro');
 
         $clientes = Cliente::whereHas('planoAlimentar', function ($query) {
-            $query->where('users_id_nutricionista', Auth::id());
+            $query->where('users_id_nutricionista', Auth::id()); //pesquisar so sobre os clientes do nutricionista logado
         })
             ->where(function ($query) use ($filtro) {
 
@@ -171,8 +175,7 @@ class ClienteController extends Controller
                     // Pesquisa pelo nome do usuario
                     ->orWhereHas('user', function ($q) use ($filtro) {
                         $q->where('name', 'like', "%{$filtro}%");
-                    });
-            })->with('user')->get();
+                    });})->with('user')->get();
 
         return view('telaCliente', [
             'clientes' => $clientes,

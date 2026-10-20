@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -63,10 +63,6 @@ class UserController extends Controller
     }
 
 
-
-
-    //duvida, nao sei oq fazer para excluir qm é cliente, pois qnd tento excluit o user da erro, ja q a tabela usuario nao é soft delets, ent nao sei oq fazer com ela
-    // devo colocar cascade ou usuario com softdelets
 
 
     public function destroy($id)
