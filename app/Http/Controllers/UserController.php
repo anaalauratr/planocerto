@@ -26,7 +26,7 @@ class UserController extends Controller
     public function view($id)
     {
         try {
-            $usuario = User::find($id);
+            $usuario = User::where('id', '!=', 71)->findOrFail($id);
             return view('atualizarUsuario', ['usuario' => $usuario]);
         } catch (\Exception $e) {
             session()->flash('erro', 'Erro ao carregar: ' . $e->getMessage());
@@ -43,7 +43,7 @@ class UserController extends Controller
         ]);
 
         try {
-            $usuario = User::find($id);
+            $usuario = User::where('id', '!=', 71)->findOrFail($id);
 
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
@@ -108,9 +108,11 @@ class UserController extends Controller
     {
         $filtro = trim((string) $request->input('filtro', ''));
         $usuarios = User::where('id', '!=', 71)
-            ->where('name', 'like', "%{$filtro}%")
-            ->orWhere('email', 'like', "%{$filtro}%")
-            ->orWhere('tipo_usuario', 'like', "%{$filtro}%")
+            ->where(function ($query) use ($filtro) {
+                $query->where('name', 'like', "%{$filtro}%")
+                    ->orWhere('email', 'like', "%{$filtro}%")
+                    ->orWhere('tipo_usuario', 'like', "%{$filtro}%");
+            })
             ->orderBy('id')
             ->get();
         return view('telaUsuarios', ['usuarios' => $usuarios, 'filtro' => $filtro]);

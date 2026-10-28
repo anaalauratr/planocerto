@@ -23,6 +23,6 @@ class Refeicao extends Model
 
     public function planoAlimentar()
     {
-        return $this->belongsTo(PlanoAlimentar::class, 'plano_alimentar_id');
+        return $this->belongsTo(PlanoAlimentar::class, 'plano_alimentar_id'); //refeicao pertence a 1 plano
     }
 }

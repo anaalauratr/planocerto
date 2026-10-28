@@ -15,9 +15,9 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $dados['email'])->first();
+        $user = User::where('email', $dados['email'])->first(); //pesquiso usuario desse email
 
-        if (!$user || !Hash::check($dados['password'], $user->password)) {
+        if (!$user || !Hash::check($dados['password'], $user->password)) { //vejo se essa senha pertence a ele e ele existe
             return response()->json([
                 'message' => 'E-mail ou senha inválidos.'
             ], 401);
@@ -30,7 +30,7 @@ class AuthController extends Controller
             ], 403);
         }
 
-        $token = $user->createToken('app-flutter')->plainTextToken;
+        $token = $user->createToken('app-flutter')->plainTextToken; //crio o token e envio o usuario e token
 
         return response()->json([
             'token' => $token,
@@ -51,12 +51,8 @@ class AuthController extends Controller
 
     public function me(Request $request)
     {
-        return response()->json($request->user());
+        return response()->json($request->user()); //mando em formato json os dados do user
     }
 
-    public function usuarios()
-    {
-        $usuarios = User::all();
-        return response()->json($usuarios);
-    }
+    
 }

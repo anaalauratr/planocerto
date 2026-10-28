@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('refeicao', function (Blueprint $table) {
             $table->id();
-           $table->foreignId('plano_alimentar_id');
+            $table->foreignId('plano_alimentar_id');
             $table->foreign('plano_alimentar_id')->references('id')->on('plano_alimentar');
-           $table->string('nome', 100);
+            $table->string('nome', 100);
             $table->text('descricao');
             $table->time('horario');
-           $table->integer('calorias');
-             $table->timestamps();
+            $table->integer('calorias');
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-         Schema::dropIfExists('refeicao');
+        Schema::dropIfExists('refeicao');
     }
 };

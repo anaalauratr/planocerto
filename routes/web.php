@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AppLoginController;
 use App\Http\Controllers\Auth\PasswordController;
+use Illuminate\Support\Facades\Auth;
 
 /*| Página inicial*/
 
@@ -26,10 +27,7 @@ Route::get('/dashboard', function () {
 | Cadastro público de nutricionista
 */
 
-Route::get(
-    '/nutricionista/create',
-    [NutricionistaController::class, 'create']
-)->name('nutricionista.create');
+Route::get('/nutricionista/create',[NutricionistaController::class, 'create'])->name('nutricionista.create');
 
 Route::get('/login-app', [AppLoginController::class, 'entrar']);
 
@@ -40,9 +38,7 @@ Route::get('/login-app', [AppLoginController::class, 'entrar']);
 Route::middleware('auth')->group(function () {
 
     //  Essa rota é para ser acessada no aplicativo, onde a pessoa tem um inAppView q ela ve a tela de alterar senha do web no celular
-    Route::get('/app/alterar-senha', function () {
-        return view('alterar-senha');
-    })->name('app.senha');
+    Route::get('/app/alterar-senha', function () { return view('alterar-senha'); })->name('app.senha');
 
 
     /*
@@ -92,19 +88,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/cliente/search',         [ClienteController::class, 'search'])->name('cliente.search');
 
     /*
-    | Usuarios, para administrador acessar
+    | Usuarios para administrador acessar
   
     */
 
-    Route::get('/usuario',                [UserController::class, 'index'])->name('usuario.index');
-    Route::get('/usuario/{id}/view',      [UserController::class, 'view'])->name('usuario.view');
-    Route::post('/usuario/{id}/update',   [UserController::class, 'update'])->name('usuario.update');
-    Route::get('/usuario/{id}/destroy',   [UserController::class, 'destroy'])->name('usuario.destroy');
-    Route::get('/usuario/search',         [UserController::class, 'search'])->name('usuario.search');
+      
 
-    /*
     
-    | Nutricionistas
+    Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/search',       [UserController::class, 'search'])->name('usuario.search');
+    Route::get('/',             [UserController::class, 'index'])->name('usuario.index');
+    Route::get('/{id}/view',    [UserController::class, 'view'])->name('usuario.view');
+    Route::post('/{id}/update', [UserController::class, 'update'])->name('usuario.update');
+    Route::get('/{id}/destroy', [UserController::class, 'destroy'])->name('usuario.destroy');
+});
+        
+  
+    
+    /* Nutricionistas
    
     */
 

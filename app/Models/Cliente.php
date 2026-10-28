@@ -31,12 +31,12 @@ class Cliente extends Model
     // Usuário (cliente)
     public function user()
     {
-        return $this->belongsTo(User::class, 'users_id');
+        return $this->belongsTo(User::class, 'users_id'); //usuario pertence a 1 cliente
     }
 
     // Plano alimentar
     public function planoAlimentar()
     {
-        return $this->belongsTo(PlanoAlimentar::class, 'plano_alimentar_id');
+        return $this->belongsTo(PlanoAlimentar::class, 'plano_alimentar_id'); //cliente pode ter 1 plano
     }
 }

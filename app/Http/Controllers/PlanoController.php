@@ -84,7 +84,7 @@ class PlanoController extends Controller
     public function view($id)
     {
         try {
-            $plano = PlanoAlimentar::find($id);
+            $plano = PlanoAlimentar::where('users_id_nutricionista', Auth::id())->findOrFail($id);
             return view('atualizarPlano', ['plano' => $plano]);   // Abre a tela com os dados dele
 
         } catch (\Exception $e) {
@@ -109,7 +109,7 @@ class PlanoController extends Controller
 
         try {
             // Busca o plano que será alterado
-            $plano = PlanoAlimentar::find($id);
+            $plano = PlanoAlimentar::where('users_id_nutricionista', Auth::id())->findOrFail($id);
 
             // Troca os dados antigos pelos novos
             $plano->nome = $request->nome;
@@ -133,7 +133,7 @@ class PlanoController extends Controller
     public function viewRefeicao($id)
     {
         try {
-            $refeicao = Refeicao::find($id);
+            $refeicao = Refeicao::whereHas('planoAlimentar', fn ($q) => $q->where('users_id_nutricionista', Auth::id()))->findOrFail($id);
             return view('atualizarRefeicao', ['refeicao' => $refeicao]);   // Abre a tela com os dados dele
 
         } catch (\Exception $e) {
@@ -154,7 +154,7 @@ class PlanoController extends Controller
 
         try {
 
-            $refeicao = Refeicao::find($id);
+            $refeicao = Refeicao::whereHas('planoAlimentar', fn ($q) => $q->where('users_id_nutricionista', Auth::id()))->findOrFail($id);
 
             // Troca os dados antigos pelos novos
 
@@ -248,7 +248,7 @@ class PlanoController extends Controller
                     ->orWhere('descricao', 'like', "%{$filtro}%")
                     ->orWhereRaw('DATE_FORMAT(data_inicio, "%d/%m/%Y") like ?', ["%{$filtro}%"]) //formato a data para pessoa poder pesquisar no formato ex: 20/10/2024
                     ->orWhereRaw('DATE_FORMAT(data_fim, "%d/%m/%Y") like ?', ["%{$filtro}%"])
-                    ->orWhereHas('refecoes', function ($sub) use ($filtro) { //verifica se existe reficoes relacionadas ao plano q atenda a alguma condicao a baixo:
+                    ->orWhereHas('refeicoes', function ($sub) use ($filtro) { //verifica se existe reficoes relacionadas ao plano q atenda a alguma condicao a baixo:
                         $sub->where('nome', 'like', "%{$filtro}%")
                             ->orWhere('descricao', 'like', "%{$filtro}%")
                             ->orWhereRaw('CAST(calorias AS CHAR) like ?', ["%{$filtro}%"]) //transforma valor numerico para textp para usar o like

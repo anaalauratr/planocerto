@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::create('plano_alimentar', function (Blueprint $table) {
+        Schema::create('plano_alimentar', function (Blueprint $table) {
             $table->id();
-             $table->foreignId('users_id_nutricionista');
+            $table->foreignId('users_id_nutricionista');
             $table->foreign('users_id_nutricionista')->references('id')->on('users');
             $table->string('nome', 100);
             $table->text('descricao');

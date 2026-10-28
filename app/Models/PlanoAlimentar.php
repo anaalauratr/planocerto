@@ -31,18 +31,18 @@ class PlanoAlimentar extends Model
     // Nutricionista
     public function nutricionista()
     {
-        return $this->belongsTo(User::class, 'users_id_nutricionista');
+        return $this->belongsTo(User::class, 'users_id_nutricionista'); //plano percente a 1 nutricionista
     }
 
     // Refeições
     public function refeicoes()
     {
-        return $this->hasMany(Refeicao::class, 'plano_alimentar_id');
+        return $this->hasMany(Refeicao::class, 'plano_alimentar_id'); //planos pode ter varias refeicoes
     }
 
     // Clientes vinculados ao plano
     public function clientes()
     {
-        return $this->hasMany(Cliente::class, 'plano_alimentar_id');
+        return $this->hasMany(Cliente::class, 'plano_alimentar_id'); //plano pode ter varios clientes
     }
 }
